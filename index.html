@@ -71,6 +71,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-pythoStudy1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2025/05/10/pythoStudy1/" class="article-date">
+  <time class="dt-published" datetime="2025-05-10T10:19:06.000Z" itemprop="datePublished">2025-05-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2025/05/10/pythoStudy1/">pythoStudy1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 特有数据类型<br>    complex：复述类型<br>    z1 &#x3D; 3 + 4j<br>    z2 &#x3D; 1 + 2j<br>    result &#x3D; z1 * z2<br>    print(result)  # 输出: (-5+10j)</p>
+<pre><code>list：一般序列
+    my_list = [1, 2, 3, &quot;hello&quot;, 5.5]
+tuple：	不可变序列
+    my_tuple = (1, 2, 3, &quot;hello&quot;, 5.5)
+range： 数字序列
+    range(5)      # 0, 1, 2, 3, 4
+    range(1, 5)   # 1, 2, 3, 4
+    range(1, 5, 2)  # 1, 3
+dict： 映射
+    person = dict(name=&quot;张三&quot;, age=25, city=&quot;北京&quot;)
+    person.get(&quot;name&quot;) # 获取键值对
+    person[&quot;name&quot;] = &quot;李四&quot; # 修改键值对
+    person.pop(&quot;age&quot;) # 删除键值对
+    person.clear() # 清空字典   
+set：集合不可重复
+    set1 = &#123;1, 2, 3, 4&#125;
+    set2 = &#123;3, 4, 5, 6&#125;
+    print(set1 &amp; set2)  # &#123;3, 4&#125; #交集
+    print(set1 | set2)  # &#123;1, 2, 3, 4, 5, 6&#125; #并集
+    print(set1 - set2)  # &#123;1, 2&#125; #差集
+    
+    numbers = [1, 2, 2, 3, 3, 4]
+    unique_numbers = set(numbers)# 列表去重
+    print(unique_numbers)  # &#123;1, 2, 3, 4&#125;
+frozenset：不可变的集合
+    frozen = frozenset([1, 2, 3]) # 创建冻结集合
+    # frozen.add(4)  # 错误！不能修改
+
+bytes：处理不可变二进制数据
+    b = b&#39;Hello&#39;
+    print(b[1:3])  # b&#39;el&#39;
+bytearray：处理可变二进制数据
+    ba = bytearray(b&#39;Hello&#39;)
+    ba[0] = 65 # 修改
+    ba.append(33) # 添加   
+    del ba[0] # 删除
+memoryview：内存实图处理和共享二进制数据
+    mv = memoryview(b&#39;Hello&#39;)
+    print(mv[0])# 访问 
+    print(mv[1:3])# 切片
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythoStudy1/" data-id="cmai6kmqs0001foluav90c4ga" data-title="pythoStudy1" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2025/05/06/Hexo/" class="article-date">
@@ -78,7 +162,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93/">技術</a>
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-Hexo/">技術(Hexo)</a>
   </div>
 
   </div>
@@ -104,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmaclxcfa0000oelualmj1gyc" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmai6kmqq0000folu48r8auo4" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -126,7 +210,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">カテゴリ</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93/">技術</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-Hexo/">技術(Hexo)</a></li><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a></li></ul>
     </div>
   </div>
 
@@ -152,6 +236,10 @@
     <h3 class="widget-title">最近の投稿</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/my-blog/2025/05/10/pythoStudy1/">pythoStudy1</a>
+          </li>
         
           <li>
             <a href="/my-blog/2025/05/06/Hexo/">HEROの常用コマンド</a>
