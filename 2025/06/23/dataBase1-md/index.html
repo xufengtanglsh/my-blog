@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>カテゴリ: 技術(python) | johouブログ</title>
+  <title>sqlserverのデータ導入と導出 | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="johouブログ">
-<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/categories/%E6%8A%80%E8%A1%93-python/index.html">
+  <meta name="description" content="①導出(BATファイル) @echo offset SERVER&#x3D;localhostset DATABASE&#x3D;DcParkBackSystemset OUTPUT_DIR&#x3D;%CD%\EXPORTset TABLES&#x3D;table1 rem 出力フォルダがなければ作成if not exist “%OUTPUT_DIR%” mkdir “%OUTPUT_DIR%”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlserverのデータ導入と導出">
+<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1-md/index.html">
 <meta property="og:site_name" content="johouブログ">
+<meta property="og:description" content="①導出(BATファイル) @echo offset SERVER&#x3D;localhostset DATABASE&#x3D;DcParkBackSystemset OUTPUT_DIR&#x3D;%CD%\EXPORTset TABLES&#x3D;table1 rem 出力フォルダがなければ作成if not exist “%OUTPUT_DIR%” mkdir “%OUTPUT_DIR%”">
 <meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2025-06-23T12:04:27.000Z">
+<meta property="article:modified_time" content="2025-06-23T12:20:19.858Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -69,39 +73,66 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/my-blog/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/my-blog/2025/05/10/pythoStudy1/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-05-10T10:19:06.000Z" itemprop="datePublished">5月 10</time>
+        <section id="main"><article id="post-dataBase1-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2025/06/23/dataBase1-md/" class="article-date">
+  <time class="dt-published" datetime="2025-06-23T12:04:27.000Z" itemprop="datePublished">2025-06-23</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-dataBase/">技術(dataBase)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/my-blog/2025/05/10/pythoStudy1/">pythoStudy1</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      sqlserverのデータ導入と導出
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①導出(BATファイル)</p>
+<p>@echo off<br>set SERVER&#x3D;localhost<br>set DATABASE&#x3D;DcParkBackSystem<br>set OUTPUT_DIR&#x3D;%CD%\EXPORT<br>set TABLES&#x3D;table1</p>
+<p>rem 出力フォルダがなければ作成<br>if not exist “%OUTPUT_DIR%” mkdir “%OUTPUT_DIR%”</p>
+<p>for %%T in (%TABLES%) do (<br>    echo テーブルをエクスポート中: %%T<br>    bcp “%DATABASE%.dbo.%%T” out “%OUTPUT_DIR%%%T.table” -S “%SERVER%” -T -c -t , -r \r\n<br>)</p>
+<p>echo データエクスポート完了！<br>pause</p>
+<p>②導入(BATファイル)</p>
+<p>@echo off<br>set SERVER&#x3D;localhost<br>set DATABASE&#x3D;DcParkBackSystem<br>set INPUT_DIR&#x3D;%CD%\IMPORT<br>set TABLES&#x3D;table1</p>
+<p>for %%T in (%TABLES%) do (<br>    echo テーブルにインポート中: %%T<br>    bcp “%DATABASE%.dbo.%%T” in “%INPUT_DIR%%%T.table” -S “%SERVER%” -T -c -t , -r \r\n<br>)</p>
+<p>echo データインポート完了！<br>pause</p>
+<p>注意点：　区切り交換できる： コンマ　→　¥t 　</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1-md/" data-id="cmc92en8r0001t8lu16ntel1j" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/my-blog/2025/05/10/pythoStudy1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">pythoStudy1</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
