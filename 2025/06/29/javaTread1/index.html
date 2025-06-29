@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>johouブログ</title>
+  <title>Java线程基础（创建、生命周期、状态） | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="johouブログ">
-<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/index.html">
+  <meta name="description" content="①代码例子public class RunnableExample { &#x2F;&#x2F; 实现Runnable接口 public static class MyRunnable implements Runnable &#123;     private String taskName;          public MyRunnable(String name) &#123;         this.t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java线程基础（创建、生命周期、状态）">
+<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/index.html">
 <meta property="og:site_name" content="johouブログ">
+<meta property="og:description" content="①代码例子public class RunnableExample { &#x2F;&#x2F; 实现Runnable接口 public static class MyRunnable implements Runnable &#123;     private String taskName;          public MyRunnable(String name) &#123;         this.t">
 <meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2025-06-29T07:29:51.000Z">
+<meta property="article:modified_time" content="2025-06-29T07:44:26.843Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -69,9 +73,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-javaTread1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-javaTread1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2025/06/29/javaTread1/" class="article-date">
   <time class="dt-published" datetime="2025-06-29T07:29:51.000Z" itemprop="datePublished">2025-06-29</time>
@@ -88,8 +90,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2025/06/29/javaTread1/">Java线程基础（创建、生命周期、状态）</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java线程基础（创建、生命周期、状态）
     </h1>
   
 
@@ -244,192 +246,19 @@ public static void main(String[] args) throws InterruptedException &#123;
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-dataBase1-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2025/06/23/dataBase1-md/" class="article-date">
-  <time class="dt-published" datetime="2025-06-23T12:04:27.000Z" itemprop="datePublished">2025-06-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-dataBase/">技術(dataBase)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2025/06/23/dataBase1-md/">sqlserverのデータ導入と導出</a>
-    </h1>
+    <a href="/my-blog/2025/06/23/dataBase1-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">sqlserverのデータ導入と導出</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>①導出(BATファイル)</p>
-<p>@echo off<br>set SERVER&#x3D;localhost<br>set DATABASE&#x3D;DcParkBackSystem<br>set OUTPUT_DIR&#x3D;%CD%\EXPORT<br>set TABLES&#x3D;table1</p>
-<p>rem 出力フォルダがなければ作成<br>if not exist “%OUTPUT_DIR%” mkdir “%OUTPUT_DIR%”</p>
-<p>for %%T in (%TABLES%) do (<br>    echo テーブルをエクスポート中: %%T<br>    bcp “%DATABASE%.dbo.%%T” out “%OUTPUT_DIR%%%T.table” -S “%SERVER%” -T -c -t , -r \r\n<br>)</p>
-<p>echo データエクスポート完了！<br>pause</p>
-<p>②導入(BATファイル)</p>
-<p>@echo off<br>set SERVER&#x3D;localhost<br>set DATABASE&#x3D;DcParkBackSystem<br>set INPUT_DIR&#x3D;%CD%\IMPORT<br>set TABLES&#x3D;table1</p>
-<p>for %%T in (%TABLES%) do (<br>    echo テーブルにインポート中: %%T<br>    bcp “%DATABASE%.dbo.%%T” in “%INPUT_DIR%%%T.table” -S “%SERVER%” -T -c -t , -r \r\n<br>)</p>
-<p>echo データインポート完了！<br>pause</p>
-<p>注意点：　区切り交換できる： コンマ　→　¥t 　</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1-md/" data-id="cmchd71660001qllu5s3aep7b" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-pythoStudy1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2025/05/10/pythoStudy1/" class="article-date">
-  <time class="dt-published" datetime="2025-05-10T10:19:06.000Z" itemprop="datePublished">2025-05-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2025/05/10/pythoStudy1/">pythoStudy1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p> 特有数据类型<br>    complex：复述类型<br>    z1 &#x3D; 3 + 4j<br>    z2 &#x3D; 1 + 2j<br>    result &#x3D; z1 * z2<br>    print(result)  # 输出: (-5+10j)</p>
-<pre><code>list：一般序列
-    my_list = [1, 2, 3, &quot;hello&quot;, 5.5]
-tuple：	不可变序列
-    my_tuple = (1, 2, 3, &quot;hello&quot;, 5.5)
-range： 数字序列
-    range(5)      # 0, 1, 2, 3, 4
-    range(1, 5)   # 1, 2, 3, 4
-    range(1, 5, 2)  # 1, 3
-dict： 映射
-    person = dict(name=&quot;张三&quot;, age=25, city=&quot;北京&quot;)
-    person.get(&quot;name&quot;) # 获取键值对
-    person[&quot;name&quot;] = &quot;李四&quot; # 修改键值对
-    person.pop(&quot;age&quot;) # 删除键值对
-    person.clear() # 清空字典   
-set：集合不可重复
-    set1 = &#123;1, 2, 3, 4&#125;
-    set2 = &#123;3, 4, 5, 6&#125;
-    print(set1 &amp; set2)  # &#123;3, 4&#125; #交集
-    print(set1 | set2)  # &#123;1, 2, 3, 4, 5, 6&#125; #并集
-    print(set1 - set2)  # &#123;1, 2&#125; #差集
-    
-    numbers = [1, 2, 2, 3, 3, 4]
-    unique_numbers = set(numbers)# 列表去重
-    print(unique_numbers)  # &#123;1, 2, 3, 4&#125;
-frozenset：不可变的集合
-    frozen = frozenset([1, 2, 3]) # 创建冻结集合
-    # frozen.add(4)  # 错误！不能修改
-
-bytes：处理不可变二进制数据
-    b = b&#39;Hello&#39;
-    print(b[1:3])  # b&#39;el&#39;
-bytearray：处理可变二进制数据
-    ba = bytearray(b&#39;Hello&#39;)
-    ba[0] = 65 # 修改
-    ba.append(33) # 添加   
-    del ba[0] # 删除
-memoryview：内存实图处理和共享二进制数据
-    mv = memoryview(b&#39;Hello&#39;)
-    print(mv[0])# 访问 
-    print(mv[1:3])# 切片
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythoStudy1/" data-id="cmchd71680004qllu1jp4conh" data-title="pythoStudy1" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2025/05/06/Hexo/" class="article-date">
-  <time class="dt-published" datetime="2025-05-06T11:50:31.000Z" itemprop="datePublished">2025-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-Hexo/">技術(Hexo)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2025/05/06/Hexo/">HEROの常用コマンド</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>キャッシュクリア<br>hexo clean<br>リソース生成<br>hexo generate　→　hexo g<br>ロカール起動<br>hexo server　→　hexo s<br>デプロイ<br>hexo deploy<br>新たな文章作成<br>hexo new<br>セットコメント<br>hexo clean &amp;&amp; hexo g -d </p>
-<p>設定ファイル（_config.yml）も修正<br>①：<br>url: <a href="https://xufengtanglsh.github.io/my-blog/">https://xufengtanglsh.github.io/my-blog/</a><br>permalink: :year&#x2F;:month&#x2F;:day&#x2F;:title&#x2F;<br>permalink_defaults:<br>pretty_urls:<br>  trailing_index: true<br>  trailing_html: true</p>
-<p>②：<br>deploy:<br>  type: git<br>  repo: <a target="_blank" rel="noopener" href="https://github.com/xufengtanglsh/my-blog.git">https://github.com/xufengtanglsh/my-blog.git</a><br>  branch: master</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmchd71640000qllubu877ds0" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
