@@ -71,6 +71,169 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-dataBase2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2025/07/05/dataBase2/" class="article-date">
+  <time class="dt-published" datetime="2025-07-05T12:32:44.000Z" itemprop="datePublished">2025-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-dataBase/">技術(dataBase)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2025/07/05/dataBase2/">高级SQL文①</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①ROW_NUMBER() OVER<br>– 为所有员工按薪资排序并分配序号<br>SELECT<br>    employee_name,<br>    salary,<br>    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_num<br>FROM employees;</p>
+<table>
+<thead>
+<tr>
+<th>employee_name</th>
+<th>salary</th>
+<th>row_num</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>80000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>75000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>70000</td>
+<td>3</td>
+</tr>
+<tr>
+<td>赵六</td>
+<td>65000</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>– 按部门分组，每个部门内按薪资排序<br>SELECT<br>    employee_name,<br>    department,<br>    salary,<br>    ROW_NUMBER() OVER (<br>        PARTITION BY department<br>        ORDER BY salary DESC<br>    ) as dept_rank<br>FROM employees;</p>
+<table>
+<thead>
+<tr>
+<th>employee_name</th>
+<th>department</th>
+<th>salary</th>
+<th>dept_rank</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>技术部</td>
+<td>80000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>技术部</td>
+<td>75000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>销售部</td>
+<td>70000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>赵六</td>
+<td>销售部</td>
+<td>65000</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>②RANK() OVER<br>　ROW_NUMBER() OVER类似， 只是他排名可以相同，相同的值分配相同的排名</p>
+<p>③DENSE_RANK() OVER<br>  RANK() OVER类似， 相同的值分配相同的排名,并且不会跳番</p>
+<p>总结：<br>– 比较ROW_NUMBER、RANK、DENSE_RANK<br>SELECT<br>    employee_name,<br>    salary,<br>    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_num,<br>    RANK() OVER (ORDER BY salary DESC) as rank_num,<br>    DENSE_RANK() OVER (ORDER BY salary DESC) as dense_rank<br>FROM employees;</p>
+<table>
+<thead>
+<tr>
+<th>employee_name</th>
+<th>salary</th>
+<th>row_num</th>
+<th>rank_num</th>
+<th>dense_rank</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>80000</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>80000</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>75000</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>赵六</td>
+<td>70000</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>钱七</td>
+<td>70000</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>孙八</td>
+<td>65000</td>
+<td>6</td>
+<td>6</td>
+<td>4</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmcq940pc0003wflug3y6etvr" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-javaTread1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2025/06/29/javaTread1/" class="article-date">
@@ -237,7 +400,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmcq8z7p10003sylu0zu3ednt" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmcq940pc0004wflufgx05l7c" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -289,7 +452,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmcq8z7p00001syluauew85q7" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmcq940pb0001wflu05pq8iyo" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -373,7 +536,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythoStudy1/" data-id="cmcq8z7p20004syluaguc6ema" data-title="pythoStudy1" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythoStudy1/" data-id="cmcq940pd0005wflu6sfm1cgu" data-title="pythoStudy1" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -418,7 +581,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmcq8z7oy0000sylucf47dbva" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmcq940p80000wflu0fophzxe" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -455,7 +618,7 @@ memoryview：内存实图处理和共享二进制数据
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/06/">6月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/05/">5月 2025</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/07/">7月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/06/">6月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/05/">5月 2025</a></li></ul>
     </div>
   </div>
 
@@ -466,6 +629,10 @@ memoryview：内存实图处理和共享二进制数据
     <h3 class="widget-title">最近の投稿</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/my-blog/2025/07/05/dataBase2/">高级SQL文①</a>
+          </li>
         
           <li>
             <a href="/my-blog/2025/06/29/javaTread1/">Java线程基础（创建、生命周期、状态）</a>

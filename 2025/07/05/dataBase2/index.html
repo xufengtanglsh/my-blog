@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>カテゴリ: 技術(python) | johouブログ</title>
+  <title>高级SQL文① | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="johouブログ">
-<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/categories/%E6%8A%80%E8%A1%93-python/index.html">
+  <meta name="description" content="①ROW_NUMBER() OVER– 为所有员工按薪资排序并分配序号SELECT    employee_name,    salary,    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_numFROM employees;    employee_name salary row_num    张三 80000 1   李四 75000 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级SQL文①">
+<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/index.html">
 <meta property="og:site_name" content="johouブログ">
+<meta property="og:description" content="①ROW_NUMBER() OVER– 为所有员工按薪资排序并分配序号SELECT    employee_name,    salary,    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_numFROM employees;    employee_name salary row_num    张三 80000 1   李四 75000 2">
 <meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2025-07-05T12:32:44.000Z">
+<meta property="article:modified_time" content="2025-07-05T13:00:19.292Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -69,39 +73,177 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/my-blog/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/my-blog/2025/05/10/pythoStudy1/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-05-10T10:19:06.000Z" itemprop="datePublished">5月 10</time>
+        <section id="main"><article id="post-dataBase2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2025/07/05/dataBase2/" class="article-date">
+  <time class="dt-published" datetime="2025-07-05T12:32:44.000Z" itemprop="datePublished">2025-07-05</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-dataBase/">技術(dataBase)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/my-blog/2025/05/10/pythoStudy1/">pythoStudy1</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      高级SQL文①
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①ROW_NUMBER() OVER<br>– 为所有员工按薪资排序并分配序号<br>SELECT<br>    employee_name,<br>    salary,<br>    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_num<br>FROM employees;</p>
+<table>
+<thead>
+<tr>
+<th>employee_name</th>
+<th>salary</th>
+<th>row_num</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>80000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>75000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>70000</td>
+<td>3</td>
+</tr>
+<tr>
+<td>赵六</td>
+<td>65000</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>– 按部门分组，每个部门内按薪资排序<br>SELECT<br>    employee_name,<br>    department,<br>    salary,<br>    ROW_NUMBER() OVER (<br>        PARTITION BY department<br>        ORDER BY salary DESC<br>    ) as dept_rank<br>FROM employees;</p>
+<table>
+<thead>
+<tr>
+<th>employee_name</th>
+<th>department</th>
+<th>salary</th>
+<th>dept_rank</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>技术部</td>
+<td>80000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>技术部</td>
+<td>75000</td>
+<td>2</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>销售部</td>
+<td>70000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>赵六</td>
+<td>销售部</td>
+<td>65000</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>②RANK() OVER<br>　ROW_NUMBER() OVER类似， 只是他排名可以相同，相同的值分配相同的排名</p>
+<p>③DENSE_RANK() OVER<br>  RANK() OVER类似， 相同的值分配相同的排名,并且不会跳番</p>
+<p>总结：<br>– 比较ROW_NUMBER、RANK、DENSE_RANK<br>SELECT<br>    employee_name,<br>    salary,<br>    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_num,<br>    RANK() OVER (ORDER BY salary DESC) as rank_num,<br>    DENSE_RANK() OVER (ORDER BY salary DESC) as dense_rank<br>FROM employees;</p>
+<table>
+<thead>
+<tr>
+<th>employee_name</th>
+<th>salary</th>
+<th>row_num</th>
+<th>rank_num</th>
+<th>dense_rank</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>80000</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>80000</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>75000</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>赵六</td>
+<td>70000</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>钱七</td>
+<td>70000</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>孙八</td>
+<td>65000</td>
+<td>6</td>
+<td>6</td>
+<td>4</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmcq940pc0003wflug3y6etvr" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/my-blog/2025/06/29/javaTread1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Java线程基础（创建、生命周期、状态）</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
