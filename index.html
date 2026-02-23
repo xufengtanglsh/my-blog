@@ -74,62 +74,31 @@
     <article id="post-fastAPI1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2026/02/23/fastAPI1/" class="article-date">
-  <time class="dt-published" datetime="2026-02-23T07:19:10.000Z" itemprop="datePublished">2026-02-23</time>
+  <time class="dt-published" datetime="2026-02-23T07:19:10.056Z" itemprop="datePublished">2026-02-23</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2026/02/23/fastAPI1/">fastAPI基础</a>
-    </h1>
-  
-
-      </header>
-    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>检查python环境<br>    python3 –version<br>创建虚拟环境<br>    python3 -m venv venv<br>激活环境<br>    source venv&#x2F;bin&#x2F;activate<br>激活环境中安装fastAPI<br>    pip install fastapi uvicorn<br>激活环境中安装ORM<br>    pip install sqlalchemy<br>工程下创建文件<br>    main.py创建到venv虚拟环境目录以外</p>
-<pre><code>from fastapi import FastAPI
-app = FastAPI()
+        <hr>
+<h2 id="title-fastAPI基础"><a href="#title-fastAPI基础" class="headerlink" title="title: fastAPI基础"></a>title: fastAPI基础</h2><p>date: 2026-02-23 16:19:10<br>tags:<br>categories: 技術(python)</p>
+<p>检查python环境<br>    python3 –version<br>创建虚拟环境<br>    python3 -m venv venv<br>激活环境<br>    source venv&#x2F;bin&#x2F;activate<br>激活环境中安装fastAPI<br>    pip install fastapi uvicorn<br>激活环境中安装ORM<br>    pip install sqlalchemy<br>工程下创建文件<br>    main.py创建到venv虚拟环境目录以外</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">@app.get(&quot;/&quot;)</span><br><span class="line">def root():</span><br><span class="line">    return &#123;&quot;message&quot;: &quot;Hello FastAPI&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-@app.get(&quot;/&quot;)
-def root():
-    return &#123;&quot;message&quot;: &quot;Hello FastAPI&quot;&#125;
-</code></pre>
 <p>启动服务<br>uvicorn main:app –reload</p>
 <p>访问<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">http://127.0.0.1:8000</a><br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a></p>
 <p>停止服务<br>control + C</p>
 <p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;router写法&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>project&#x2F;<br> ├── main.py<br> ├── routers&#x2F;<br> │     ├── student.py<br> │     └── user.py</p>
-<p>student.py<br>    from fastapi import APIRouter<br>    router &#x3D; APIRouter()</p>
-<pre><code>@router.get(&quot;/students&quot;)
-def get_students():
-    return &#123;&quot;msg&quot;: &quot;students&quot;&#125;
-</code></pre>
-<p>user.py<br>    from fastapi import APIRouter<br>    router &#x3D; APIRouter()</p>
-<pre><code>@router.get(&quot;/users&quot;)
-def get_users():
-    return &#123;&quot;msg&quot;: &quot;users&quot;&#125;
-</code></pre>
-<p>main.py<br>    from fastapi import FastAPI<br>    from routers import student<br>    from routers import user</p>
-<pre><code>app = FastAPI()
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">student.py</span><br><span class="line">    from fastapi import APIRouter</span><br><span class="line">    router = APIRouter()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@router.get(&quot;/students&quot;)</span><br><span class="line">def get_students():</span><br><span class="line">    return &#123;&quot;msg&quot;: &quot;students&quot;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">user.py</span><br><span class="line">    from fastapi import APIRouter</span><br><span class="line">    router = APIRouter()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@router.get(&quot;/users&quot;)</span><br><span class="line">def get_users():</span><br><span class="line">    return &#123;&quot;msg&quot;: &quot;users&quot;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main.py</span><br><span class="line">    from fastapi import FastAPI</span><br><span class="line">    from routers import student</span><br><span class="line">    from routers import user</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">app.include_router(student.router)</span><br><span class="line">app.include_router(user.router)</span><br></pre></td></tr></table></figure>
 
-app.include_router(student.router)
-app.include_router(user.router)
-</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmlywwd8x0003t7lu7fp8hfa9" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmlyx0ad00004zwlufbwr5i9p" data-title="" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -179,7 +148,7 @@ app.include_router(user.router)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmlywwd8z000bt7luh4endi4j" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmlyx0ad2000bzwlu0blg904d" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -239,7 +208,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmlywwd8z0008t7lug9t38wwi" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmlyx0ad10008zwlufps77zr1" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -402,7 +371,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmlywwd8y0004t7lu64aibohg" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmlyx0acz0003zwluhggk8vj2" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -580,7 +549,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmlywwd8y0005t7lu8b0848p7" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmlyx0ad00005zwluebg5gokg" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -632,7 +601,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmlywwd8w0001t7lu6qorhwh8" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmlyx0acy0001zwlu119sbihu" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -716,7 +685,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmlywwd8y0007t7ludyiqbojd" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmlyx0ad10007zwlud0eh0sfe" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -761,7 +730,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmlywwd8u0000t7lueczxhs1k" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmlyx0acw0000zwlu22362qsm" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -811,7 +780,7 @@ memoryview：内存实图处理和共享二进制数据
       <ul>
         
           <li>
-            <a href="/my-blog/2026/02/23/fastAPI1/">fastAPI基础</a>
+            <a href="/my-blog/2026/02/23/fastAPI1/">(no title)</a>
           </li>
         
           <li>

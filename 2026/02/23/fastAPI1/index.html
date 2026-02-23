@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>fastAPI基础 | johouブログ</title>
+  <title>johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="检查python环境    python3 –version创建虚拟环境    python3 -m venv venv激活环境    source venv&#x2F;bin&#x2F;activate激活环境中安装fastAPI    pip install fastapi uvicorn激活环境中安装ORM    pip install sqlalchemy工程下创建文件    main.p">
+  <meta name="description" content="title: fastAPI基础date: 2026-02-23 16:19:10tags:categories: 技術(python) 检查python环境    python3 –version创建虚拟环境    python3 -m venv venv激活环境    source venv&#x2F;bin&#x2F;activate激活环境中安装fastAPI    pip instal">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fastAPI基础">
+<meta property="og:title" content="johouブログ">
 <meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/index.html">
 <meta property="og:site_name" content="johouブログ">
-<meta property="og:description" content="检查python环境    python3 –version创建虚拟环境    python3 -m venv venv激活环境    source venv&#x2F;bin&#x2F;activate激活环境中安装fastAPI    pip install fastapi uvicorn激活环境中安装ORM    pip install sqlalchemy工程下创建文件    main.p">
+<meta property="og:description" content="title: fastAPI基础date: 2026-02-23 16:19:10tags:categories: 技術(python) 检查python环境    python3 –version创建虚拟环境    python3 -m venv venv激活环境    source venv&#x2F;bin&#x2F;activate激活环境中安装fastAPI    pip instal">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2026-02-23T07:19:10.000Z">
-<meta property="article:modified_time" content="2026-02-23T08:17:28.825Z">
+<meta property="article:published_time" content="2026-02-23T07:19:10.056Z">
+<meta property="article:modified_time" content="2026-02-23T08:28:44.114Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -76,62 +76,31 @@
         <section id="main"><article id="post-fastAPI1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2026/02/23/fastAPI1/" class="article-date">
-  <time class="dt-published" datetime="2026-02-23T07:19:10.000Z" itemprop="datePublished">2026-02-23</time>
+  <time class="dt-published" datetime="2026-02-23T07:19:10.056Z" itemprop="datePublished">2026-02-23</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      fastAPI基础
-    </h1>
-  
-
-      </header>
-    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>检查python环境<br>    python3 –version<br>创建虚拟环境<br>    python3 -m venv venv<br>激活环境<br>    source venv&#x2F;bin&#x2F;activate<br>激活环境中安装fastAPI<br>    pip install fastapi uvicorn<br>激活环境中安装ORM<br>    pip install sqlalchemy<br>工程下创建文件<br>    main.py创建到venv虚拟环境目录以外</p>
-<pre><code>from fastapi import FastAPI
-app = FastAPI()
+        <hr>
+<h2 id="title-fastAPI基础"><a href="#title-fastAPI基础" class="headerlink" title="title: fastAPI基础"></a>title: fastAPI基础</h2><p>date: 2026-02-23 16:19:10<br>tags:<br>categories: 技術(python)</p>
+<p>检查python环境<br>    python3 –version<br>创建虚拟环境<br>    python3 -m venv venv<br>激活环境<br>    source venv&#x2F;bin&#x2F;activate<br>激活环境中安装fastAPI<br>    pip install fastapi uvicorn<br>激活环境中安装ORM<br>    pip install sqlalchemy<br>工程下创建文件<br>    main.py创建到venv虚拟环境目录以外</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">@app.get(&quot;/&quot;)</span><br><span class="line">def root():</span><br><span class="line">    return &#123;&quot;message&quot;: &quot;Hello FastAPI&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-@app.get(&quot;/&quot;)
-def root():
-    return &#123;&quot;message&quot;: &quot;Hello FastAPI&quot;&#125;
-</code></pre>
 <p>启动服务<br>uvicorn main:app –reload</p>
 <p>访问<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">http://127.0.0.1:8000</a><br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a></p>
 <p>停止服务<br>control + C</p>
 <p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;router写法&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>project&#x2F;<br> ├── main.py<br> ├── routers&#x2F;<br> │     ├── student.py<br> │     └── user.py</p>
-<p>student.py<br>    from fastapi import APIRouter<br>    router &#x3D; APIRouter()</p>
-<pre><code>@router.get(&quot;/students&quot;)
-def get_students():
-    return &#123;&quot;msg&quot;: &quot;students&quot;&#125;
-</code></pre>
-<p>user.py<br>    from fastapi import APIRouter<br>    router &#x3D; APIRouter()</p>
-<pre><code>@router.get(&quot;/users&quot;)
-def get_users():
-    return &#123;&quot;msg&quot;: &quot;users&quot;&#125;
-</code></pre>
-<p>main.py<br>    from fastapi import FastAPI<br>    from routers import student<br>    from routers import user</p>
-<pre><code>app = FastAPI()
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">student.py</span><br><span class="line">    from fastapi import APIRouter</span><br><span class="line">    router = APIRouter()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@router.get(&quot;/students&quot;)</span><br><span class="line">def get_students():</span><br><span class="line">    return &#123;&quot;msg&quot;: &quot;students&quot;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">user.py</span><br><span class="line">    from fastapi import APIRouter</span><br><span class="line">    router = APIRouter()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@router.get(&quot;/users&quot;)</span><br><span class="line">def get_users():</span><br><span class="line">    return &#123;&quot;msg&quot;: &quot;users&quot;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main.py</span><br><span class="line">    from fastapi import FastAPI</span><br><span class="line">    from routers import student</span><br><span class="line">    from routers import user</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">app.include_router(student.router)</span><br><span class="line">app.include_router(user.router)</span><br></pre></td></tr></table></figure>
 
-app.include_router(student.router)
-app.include_router(user.router)
-</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmlywwd8x0003t7lu7fp8hfa9" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmlyx0ad00004zwlufbwr5i9p" data-title="" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -189,7 +158,7 @@ app.include_router(user.router)
       <ul>
         
           <li>
-            <a href="/my-blog/2026/02/23/fastAPI1/">fastAPI基础</a>
+            <a href="/my-blog/2026/02/23/fastAPI1/">(no title)</a>
           </li>
         
           <li>
