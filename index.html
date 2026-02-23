@@ -71,6 +71,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-fastAPI2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/02/23/fastAPI2/" class="article-date">
+  <time class="dt-published" datetime="2026-02-23T09:47:35.000Z" itemprop="datePublished">2026-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/02/23/fastAPI2/">fastAPI参数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①路径参数<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/students/100">http://127.0.0.1:8000/students/100</a></p>
+<pre><code>@app.get(&quot;/students/&#123;student_id&#125;&quot;)
+def get_student(student_id: int):
+    return &#123;&quot;id&quot;: student_id&#125;
+</code></pre>
+<p>特点：<br>必须写在 URL 路径中<br>自动类型转换<br>类型错误会自动报 422</p>
+<p>②查询参数<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/students?page=2&size=20">http://127.0.0.1:8000/students?page=2&amp;size=20</a></p>
+<pre><code>@app.get(&quot;/students&quot;)
+def get_students(page: int = 1, size: Optional[int] = 10):
+return &#123;&quot;page&quot;: page, &quot;size&quot;: size&#125;
+</code></pre>
+<p>特点：<br>可选参数可以给默认值<br>自动校验类型</p>
+<p>③请求体参数（Body）<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/students">http://127.0.0.1:8000/students</a><br>{<br>  “name”: “Tom”,<br>  “age”: 20<br>}</p>
+<pre><code>from pydantic import BaseModel
+class Student(BaseModel):
+    name: str
+    age: int
+
+@app.post(&quot;/students&quot;)
+def create_student(student: Student):
+    return student
+</code></pre>
+<p>特点：<br>自动 JSON 解析<br>自动校验<br>自动生成文档</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmlz13do600038wlu5fnecwpg" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-fastAPI1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2026/02/23/fastAPI1/" class="article-date">
@@ -117,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmlyxt7a10004ewlu8ts5f000" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmlz13do000018wluantl997y" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -167,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmlyxt7a20008ewlu65zwbsl5" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmlz13doa00088wlu7dplctn0" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -227,7 +292,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmlyxt7a3000bewluc6kyb3a6" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmlz13do900078wlu22dhevam" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -390,7 +455,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmlyxt7a10003ewluh69jd7wg" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmlz13dof000b8wlud0mo0x9l" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -568,7 +633,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmlyxt7a20005ewlufs3t7wfk" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmlz13do700048wlu51vc2kq9" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -620,7 +685,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmlyxt7a00001ewlu6fk34r08" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmlz13dnr00008wlu8k4ed02a" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -704,7 +769,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmlyxt7a20007ewlu9s5zgtx0" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmlz13do800058wludsfeauqz" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -749,7 +814,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmlyxt79y0000ewlua065ddwp" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmlz13dog000c8wluejdd5k5r" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -799,6 +864,10 @@ memoryview：内存实图处理和共享二进制数据
       <ul>
         
           <li>
+            <a href="/my-blog/2026/02/23/fastAPI2/">fastAPI参数</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2026/02/23/fastAPI1/">fastAPI基础</a>
           </li>
         
@@ -812,10 +881,6 @@ memoryview：内存实图处理和共享二进制数据
         
           <li>
             <a href="/my-blog/2025/07/05/dataBase2/">高级SQL文①</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2025/06/29/javaTread1/">Java线程基础（创建、生命周期、状态）</a>
           </li>
         
       </ul>
