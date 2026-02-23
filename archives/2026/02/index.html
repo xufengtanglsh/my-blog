@@ -4,17 +4,13 @@
   <meta charset="utf-8">
   
   
-  <title>python特有数据类型 | johouブログ</title>
+  <title>アーカイブ: 2026/2 | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="特有数据类型    complex：复述类型    z1 &#x3D; 3 + 4j    z2 &#x3D; 1 + 2j    result &#x3D; z1 * z2    print(result)  # 输出: (-5+10j) list：一般序列     my_list &#x3D; [1, 2, 3, &quot;hello&quot;, 5.5] tuple：	不可变序列     my_">
-<meta property="og:type" content="article">
-<meta property="og:title" content="python特有数据类型">
-<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="johouブログ">
+<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/archives/2026/02/index.html">
 <meta property="og:site_name" content="johouブログ">
-<meta property="og:description" content="特有数据类型    complex：复述类型    z1 &#x3D; 3 + 4j    z2 &#x3D; 1 + 2j    result &#x3D; z1 * z2    print(result)  # 输出: (-5+10j) list：一般序列     my_list &#x3D; [1, 2, 3, &quot;hello&quot;, 5.5] tuple：	不可变序列     my_">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2025-05-10T10:19:06.000Z">
-<meta property="article:modified_time" content="2026-02-23T06:27:03.755Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -73,107 +69,58 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-pythonStudy1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2025/05/10/pythonStudy1/" class="article-date">
-  <time class="dt-published" datetime="2025-05-10T10:19:06.000Z" itemprop="datePublished">2025-05-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      python特有数据类型
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/my-blog/archives/2026" class="archive-year">2026</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/my-blog/2026/02/23/pythonStudy3/" class="archive-article-date">
+  <time class="dt-published" datetime="2026-02-23T06:39:40.000Z" itemprop="datePublished">2月 23</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/my-blog/2026/02/23/pythonStudy3/">python类声明</a>
     </h1>
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p> 特有数据类型<br>    complex：复述类型<br>    z1 &#x3D; 3 + 4j<br>    z2 &#x3D; 1 + 2j<br>    result &#x3D; z1 * z2<br>    print(result)  # 输出: (-5+10j)</p>
-<pre><code>list：一般序列
-    my_list = [1, 2, 3, &quot;hello&quot;, 5.5]
-tuple：	不可变序列
-    my_tuple = (1, 2, 3, &quot;hello&quot;, 5.5)
-range： 数字序列
-    range(5)      # 0, 1, 2, 3, 4
-    range(1, 5)   # 1, 2, 3, 4
-    range(1, 5, 2)  # 1, 3
-dict： 映射
-    person = dict(name=&quot;张三&quot;, age=25, city=&quot;北京&quot;)
-    person.get(&quot;name&quot;) # 获取键值对
-    person[&quot;name&quot;] = &quot;李四&quot; # 修改键值对
-    person.pop(&quot;age&quot;) # 删除键值对
-    person.clear() # 清空字典   
-set：集合不可重复
-    set1 = &#123;1, 2, 3, 4&#125;
-    set2 = &#123;3, 4, 5, 6&#125;
-    print(set1 &amp; set2)  # &#123;3, 4&#125; #交集
-    print(set1 | set2)  # &#123;1, 2, 3, 4, 5, 6&#125; #并集
-    print(set1 - set2)  # &#123;1, 2&#125; #差集
-    
-    numbers = [1, 2, 2, 3, 3, 4]
-    unique_numbers = set(numbers)# 列表去重
-    print(unique_numbers)  # &#123;1, 2, 3, 4&#125;
-frozenset：不可变的集合
-    frozen = frozenset([1, 2, 3]) # 创建冻结集合
-    # frozen.add(4)  # 错误！不能修改
-
-bytes：处理不可变二进制数据
-    b = b&#39;Hello&#39;
-    print(b[1:3])  # b&#39;el&#39;
-bytearray：处理可变二进制数据
-    ba = bytearray(b&#39;Hello&#39;)
-    ba[0] = 65 # 修改
-    ba.append(33) # 添加   
-    del ba[0] # 删除
-memoryview：内存实图处理和共享二进制数据
-    mv = memoryview(b&#39;Hello&#39;)
-    print(mv[0])# 访问 
-    print(mv[1:3])# 切片
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmlytchzw00044gluf3bab5xu" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
+    </header>
   </div>
+</article>
   
     
-<nav id="article-nav">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/my-blog/2026/02/23/pythonStudy2/" class="archive-article-date">
+  <time class="dt-published" datetime="2026-02-23T06:29:26.000Z" itemprop="datePublished">2月 23</time>
+</a>
+      
   
-    <a href="/my-blog/2025/06/23/dataBase1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          sqlserverのデータ導入と導出
-        
-      </div>
-    </a>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/my-blog/2026/02/23/pythonStudy2/">python文法</a>
+    </h1>
   
-  
-    <a href="/my-blog/2025/05/06/Hexo/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">HEROの常用コマンド</div>
-    </a>
-  
-</nav>
 
-  
+    </header>
+  </div>
 </article>
+  
+  
+    </div></section>
+  
 
 
 </section>

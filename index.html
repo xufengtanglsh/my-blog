@@ -71,6 +71,120 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-pythonStudy3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/02/23/pythonStudy3/" class="article-date">
+  <time class="dt-published" datetime="2026-02-23T06:39:40.000Z" itemprop="datePublished">2026-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/02/23/pythonStudy3/">python类声明</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>class Shape:<br>    def area(self):<br>        raise NotImplementedError(“必须实现area方法”)</p>
+<p>class Rectangle(Shape):<br>    def <strong>init</strong>(self, width, height):<br>        self.width &#x3D; width<br>        self.height &#x3D; height</p>
+<pre><code>def area(self):
+    return self.width * self.height
+</code></pre>
+<p>class Circle(Shape):<br>    def <strong>init</strong>(self, radius):<br>        self.radius &#x3D; radius</p>
+<pre><code>def area(self):
+    return 3.14 * self.radius * self.radius
+</code></pre>
+<p>def print_area(shape):<br>    print(shape.area())</p>
+<p>r &#x3D; Rectangle(4, 5)<br>c &#x3D; Circle(3)</p>
+<p>print_area(r)<br>print_area(c)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmlytchzz000i4glugdzbhfog" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-pythonStudy2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/02/23/pythonStudy2/" class="article-date">
+  <time class="dt-published" datetime="2026-02-23T06:29:26.000Z" itemprop="datePublished">2026-02-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/02/23/pythonStudy2/">python文法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>运算符<br>    a &#x3D; 10<br>    b &#x3D; 3<br>    print(a + b)  # 加<br>    print(a - b)  # 减<br>    print(a * b)  # 乘<br>    print(a &#x2F; b)  # 除<br>    print(a &#x2F;&#x2F; b) # 取整除<br>    print(a % b)  # 取余<br>    print(a ** b) # 幂运算<br>条件判断<br>    score &#x3D; 85</p>
+<pre><code>if score &gt;= 90:
+    print(&quot;优秀&quot;)
+elif score &gt;= 60:
+    print(&quot;及格&quot;)
+else:
+    print(&quot;不及格&quot;)
+</code></pre>
+<p>循环<br>    for i in range(5):<br>    print(i)</p>
+<pre><code>i = 0
+while i &lt; 5:
+    print(i)
+    i += 1
+</code></pre>
+<p>函数<br>    def add(a, b):<br>    return a + b</p>
+<pre><code>result = add(3, 5)
+print(result)
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmlytchzx00074glu8hxp8v16" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-dataBase2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2025/07/05/dataBase2/" class="article-date">
@@ -222,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmlyt3apz0001xmlu0vrda0gw" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmlytchzv00014glu11qxdxre" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -400,7 +514,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmlyt3aq10004xmlu62xd1ip4" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmlytchzw00034glu3ldacw56" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -452,7 +566,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmlyt3aq10003xmlu9plgduki" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmlytchzx00054glu113hgux2" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -536,7 +650,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmlyt3aq20005xmluezda1to3" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmlytchzw00044gluf3bab5xu" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -581,7 +695,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmlyt3apw0000xmlu0ia6fb2i" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmlytchzt00004gluemkke0bk" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -618,7 +732,7 @@ memoryview：内存实图处理和共享二进制数据
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/07/">7月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/06/">6月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/05/">5月 2025</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2026/02/">2月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/07/">7月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/06/">6月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/05/">5月 2025</a></li></ul>
     </div>
   </div>
 
@@ -631,6 +745,14 @@ memoryview：内存实图处理和共享二进制数据
       <ul>
         
           <li>
+            <a href="/my-blog/2026/02/23/pythonStudy3/">python类声明</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2026/02/23/pythonStudy2/">python文法</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2025/07/05/dataBase2/">高级SQL文①</a>
           </li>
         
@@ -640,14 +762,6 @@ memoryview：内存实图处理和共享二进制数据
         
           <li>
             <a href="/my-blog/2025/06/23/dataBase1/">sqlserverのデータ導入と導出</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2025/05/10/pythonStudy1/">python特有数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2025/05/06/Hexo/">HEROの常用コマンド</a>
           </li>
         
       </ul>
