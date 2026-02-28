@@ -71,6 +71,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-fastAPI3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/02/28/fastAPI3/" class="article-date">
+  <time class="dt-published" datetime="2026-02-28T07:42:30.000Z" itemprop="datePublished">2026-02-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/02/28/fastAPI3/">参数验证</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①简单的参数验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">@app.get(&quot;/students&quot;)</span><br><span class="line">def get_students(page: int = 1, size: int = 10):</span><br><span class="line">    return &#123;&quot;page&quot;: page, &quot;size&quot;: size&#125;</span><br><span class="line"></span><br><span class="line">int → 自动验证必须是整数</span><br></pre></td></tr></table></figure>
+
+<p>②使用Query稍微严格验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    from fastapi import FastAPI, Query</span><br><span class="line">    app = FastAPI()</span><br><span class="line"></span><br><span class="line">    @app.get(&quot;/students&quot;)</span><br><span class="line">    def get_students(</span><br><span class="line">        page: int = Query(1, ge=1),</span><br><span class="line">        size: int = Query(10, ge=1, le=100)</span><br><span class="line">    ):</span><br><span class="line">return &#123;&quot;page&quot;: page, &quot;size&quot;: size&#125;</span><br></pre></td></tr></table></figure>
+
+<p>③路径参数验证（Path）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI, Path</span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">@app.get(&quot;/students/&#123;student_id&#125;&quot;)</span><br><span class="line">def get_student(</span><br><span class="line">    student_id: int = Path(..., gt=0)</span><br><span class="line">):</span><br><span class="line">    return &#123;&quot;student_id&quot;: student_id&#125;</span><br><span class="line"></span><br><span class="line">... 表示必填</span><br><span class="line">gt=0 表示必须 &gt; 0</span><br></pre></td></tr></table></figure>
+
+<p>④请求体参数验证（Body）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">from pydantic import BaseModel, Field</span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">class Student(BaseModel):</span><br><span class="line">    name: str = Field(..., min_length=2, max_length=20)</span><br><span class="line">    age: int = Field(..., ge=1, le=120)</span><br><span class="line">    score: float = Field(..., ge=0, le=100)</span><br><span class="line">    # 正则</span><br><span class="line">    phone: str = Field(..., pattern=&quot;^1[3-9]\d&#123;9&#125;$&quot;) </span><br><span class="line"></span><br><span class="line">@app.post(&quot;/students&quot;)</span><br><span class="line">def create_student(student: Student):</span><br><span class="line">    return student</span><br></pre></td></tr></table></figure>
+
+<p>⑤自定义验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from pydantic import BaseModel, field_validator</span><br><span class="line">class Student(BaseModel):</span><br><span class="line">    age: int</span><br><span class="line"></span><br><span class="line">@field_validator(&quot;age&quot;)</span><br><span class="line">def check_age(cls, v):</span><br><span class="line">    if v &lt; 18:</span><br><span class="line">        raise ValueError(&quot;年龄必须大于18&quot;)</span><br><span class="line">    return v</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmm62669y0007zilu2zaeee0c" data-title="参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-fastAPI2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2026/02/23/fastAPI2/" class="article-date">
@@ -124,7 +181,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmm625l400005xnlu01dkb2by" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmm62669y0005zilu9f1cgdgw" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -182,7 +239,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmm625l3z0004xnlu91818724" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmm62669y0004zilugu6n0ohg" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -232,7 +289,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmm625l41000cxnlucr0s0ydi" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmm6266a0000fzilu96wxbrsj" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -292,7 +349,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmm625l41000bxnlufbbyc6gy" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmm6266a0000czilu7lolejj2" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -455,7 +512,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmm625l3z0003xnlu8hr0h492" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmm62669x0003zilubftd6p9m" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -633,7 +690,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmm625l400007xnlu6111fjj9" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmm62669z0008zilugpv0duxq" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -685,7 +742,7 @@ public static void main(String[] args) throws InterruptedException &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmm625l3y0001xnlu3yylc1ai" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmm62669w0001zilu01uzdsrs" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -769,7 +826,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmm625l400008xnluc5de3kdk" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmm62669z000bzilu70u87m55" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -814,7 +871,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmm625l3w0000xnluakch4hqw" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmm62669u0000zilu4xlrch5i" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -864,6 +921,10 @@ memoryview：内存实图处理和共享二进制数据
       <ul>
         
           <li>
+            <a href="/my-blog/2026/02/28/fastAPI3/">参数验证</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2026/02/23/fastAPI2/">fastAPI参数</a>
           </li>
         
@@ -877,10 +938,6 @@ memoryview：内存实图处理和共享二进制数据
         
           <li>
             <a href="/my-blog/2026/02/23/pythonStudy2/">python文法</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2025/07/05/dataBase2/">高级SQL文①</a>
           </li>
         
       </ul>
