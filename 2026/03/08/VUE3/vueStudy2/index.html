@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>VUE入门Samle和elemetPlus应用 | johouブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="①安装element-plus    npm install element-plus ②sample    index.html    通过下面代码引用main.ts 12index.html&lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;&#x2F;src&#x2F;main.ts&quot;&gt;&lt;&#x2F;script&gt;    12345678910111213">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE入门Samle和elemetPlus应用">
+<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/index.html">
+<meta property="og:site_name" content="johouブログ">
+<meta property="og:description" content="①安装element-plus    npm install element-plus ②sample    index.html    通过下面代码引用main.ts 12index.html&lt;script type&#x3D;&quot;module&quot; src&#x3D;&quot;&#x2F;src&#x2F;main.ts&quot;&gt;&lt;&#x2F;script&gt;    12345678910111213">
+<meta property="og:locale" content="ja_JP">
+<meta property="article:published_time" content="2026-03-08T08:25:11.000Z">
+<meta property="article:modified_time" content="2026-03-15T06:28:50.232Z">
+<meta property="article:author" content="johou">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/my-blog/atom.xml" title="johouブログ" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/my-blog/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/my-blog/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/my-blog/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/my-blog/" id="logo">johouブログ</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/my-blog/">Home</a>
+        
+          <a class="main-nav-link" href="/my-blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/my-blog/atom.xml" title="RSSフィード"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="検索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://xufengtanglsh.github.io/my-blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-VUE3/vueStudy2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/03/08/VUE3/vueStudy2/" class="article-date">
+  <time class="dt-published" datetime="2026-03-08T08:25:11.000Z" itemprop="datePublished">2026-03-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-VUE3/">技術(VUE3)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      VUE入门Samle和elemetPlus应用
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①安装element-plus<br>    npm install element-plus</p>
+<p>②sample<br>    index.html<br>    通过下面代码引用main.ts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index.html</span><br><span class="line">&lt;script type=&quot;module&quot; src=&quot;/src/main.ts&quot;&gt;&lt;/script&gt; </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">main.ts</span><br><span class="line">import &#123; createApp&#125; from &#x27;vue&#x27;</span><br><span class="line">import &#123; createPinia &#125; from &#x27;pinia&#x27;</span><br><span class="line">import ElementPlus  from &#x27;element-plus&#x27;</span><br><span class="line">import &#x27;element-plus/dist/index.css&#x27;</span><br><span class="line"></span><br><span class="line">import App from &#x27;./App.vue&#x27;</span><br><span class="line">import router from &#x27;./router&#x27;</span><br><span class="line"></span><br><span class="line">const app = createApp(App)</span><br><span class="line"></span><br><span class="line">app.use(createPinia())</span><br><span class="line">app.use(router)</span><br><span class="line">app.use(ElementPlus)</span><br><span class="line">app.mount(&#x27;#app&#x27;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">App.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;router-view /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">router.ts</span><br><span class="line">import &#123; createRouter, createWebHistory &#125; from &#x27;vue-router&#x27;</span><br><span class="line"></span><br><span class="line">const router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(import.meta.env.BASE_URL),</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#x27;/&#x27;,</span><br><span class="line">      redirect: &#x27;/login&#x27;,   // 访问根路径时直接跳到 /login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#x27;/login&#x27;,</span><br><span class="line">      name: &#x27;Login&#x27;,</span><br><span class="line">      component: () =&gt; import(&#x27;@/views/login.vue&#x27;),  // 或 import(&#x27;@/src/login.vue&#x27;) 视你路径而定</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default router</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">login.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;login-wrap&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;login-card&quot;&gt;</span><br><span class="line">        &lt;h2 class=&quot;title&quot;&gt;登录&lt;/h2&gt;</span><br><span class="line">        &lt;el-form label-position=&quot;top&quot; class=&quot;login-form&quot;&gt;</span><br><span class="line">          &lt;el-form-item label=&quot;用户名&quot;&gt;</span><br><span class="line">            &lt;el-input</span><br><span class="line">              v-model=&quot;username&quot;</span><br><span class="line">              placeholder=&quot;请输入用户名&quot;</span><br><span class="line">              clearable</span><br><span class="line">            /&gt;</span><br><span class="line">          &lt;/el-form-item&gt;</span><br><span class="line">          &lt;el-form-item label=&quot;密码&quot;&gt;</span><br><span class="line">            &lt;el-input</span><br><span class="line">              v-model=&quot;password&quot;</span><br><span class="line">              type=&quot;password&quot;</span><br><span class="line">              placeholder=&quot;请输入密码&quot;</span><br><span class="line">              show-password</span><br><span class="line">              clearable</span><br><span class="line">            /&gt;</span><br><span class="line">          &lt;/el-form-item&gt;</span><br><span class="line">          &lt;el-form-item&gt;</span><br><span class="line">            &lt;el-button type=&quot;primary&quot; class=&quot;submit-btn&quot; @click=&quot;login&quot;&gt;</span><br><span class="line">              登 录</span><br><span class="line">            &lt;/el-button&gt;</span><br><span class="line">          &lt;/el-form-item&gt;</span><br><span class="line">        &lt;/el-form&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">  import &#123; ref &#125; from &#x27;vue&#x27;</span><br><span class="line">  import &#123; useUserStore &#125; from &#x27;@/stores/user&#x27;</span><br><span class="line">  </span><br><span class="line">  const userStore = useUserStore()</span><br><span class="line">  const username = ref(userStore.state.name ?? &#x27;&#x27;)</span><br><span class="line">  const password = ref(userStore.state.password ?? &#x27;&#x27;)</span><br><span class="line">  </span><br><span class="line">  const login = () =&gt; &#123;</span><br><span class="line">    console.log(username.value, password.value)</span><br><span class="line">  &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;style scoped lang=&quot;scss&quot; src=&quot;../styles/login.css&quot;&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">user.ts</span><br><span class="line"></span><br><span class="line">import &#123; ref, computed &#125; from &#x27;vue&#x27;</span><br><span class="line">import &#123; defineStore &#125; from &#x27;pinia&#x27;</span><br><span class="line"></span><br><span class="line">export const useUserStore = defineStore(&#x27;user&#x27;, () =&gt; &#123;</span><br><span class="line">    const state = ref(&#123;</span><br><span class="line">        name:&quot;Tom&quot;,</span><br><span class="line">        password:&quot;123456&quot;</span><br><span class="line">      &#125;)</span><br><span class="line">    return &#123;</span><br><span class="line">        state</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">login.css</span><br><span class="line"></span><br><span class="line">.login-wrap &#123;</span><br><span class="line">    min-height: 100vh;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items: center;</span><br><span class="line">    background: #f5f7fa;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .login-card &#123;</span><br><span class="line">    width: 400px;</span><br><span class="line">    padding: 32px;</span><br><span class="line">    background: #fff;</span><br><span class="line">    border-radius: 8px;</span><br><span class="line">    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .title &#123;</span><br><span class="line">    margin: 0 0 24px 0;</span><br><span class="line">    font-size: 20px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    color: #303133;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .login-form &#123;</span><br><span class="line">    margin-top: 8px;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .submit-btn &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmmrdj6f0000nkclu4dzpcbib" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/my-blog/2026/03/08/VUE3/vueStudy1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          VUE环境安装
+        
+      </div>
+    </a>
+  
+  
+    <a href="/my-blog/2026/03/01/fastAPI5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">fastAPI cookie和header取得</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">カテゴリ</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-Hexo/">技術(Hexo)</a></li><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-Java/">技術(Java)</a></li><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-VUE3/">技術(VUE3)</a></li><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-dataBase/">技術(dataBase)</a></li><li class="category-list-item"><a class="category-list-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2026/03/">3月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2026/02/">2月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/07/">7月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/06/">6月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/my-blog/archives/2025/05/">5月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2026/03/01/fastAPI5/">fastAPI cookie和header取得</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2026/03/01/fastAPI4/">fastAPI事例数据</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2026/02/28/fastAPI3/">fastAPI参数验证</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 johou<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/my-blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/my-blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/my-blog/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/my-blog/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/my-blog/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

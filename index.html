@@ -110,7 +110,66 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmmhltap5000kgclucms437zo" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmmrdj6ez000kkcluh8ql913b" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-VUE3/vueStudy2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/03/08/VUE3/vueStudy2/" class="article-date">
+  <time class="dt-published" datetime="2026-03-08T08:25:11.000Z" itemprop="datePublished">2026-03-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-VUE3/">技術(VUE3)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①安装element-plus<br>    npm install element-plus</p>
+<p>②sample<br>    index.html<br>    通过下面代码引用main.ts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index.html</span><br><span class="line">&lt;script type=&quot;module&quot; src=&quot;/src/main.ts&quot;&gt;&lt;/script&gt; </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">main.ts</span><br><span class="line">import &#123; createApp&#125; from &#x27;vue&#x27;</span><br><span class="line">import &#123; createPinia &#125; from &#x27;pinia&#x27;</span><br><span class="line">import ElementPlus  from &#x27;element-plus&#x27;</span><br><span class="line">import &#x27;element-plus/dist/index.css&#x27;</span><br><span class="line"></span><br><span class="line">import App from &#x27;./App.vue&#x27;</span><br><span class="line">import router from &#x27;./router&#x27;</span><br><span class="line"></span><br><span class="line">const app = createApp(App)</span><br><span class="line"></span><br><span class="line">app.use(createPinia())</span><br><span class="line">app.use(router)</span><br><span class="line">app.use(ElementPlus)</span><br><span class="line">app.mount(&#x27;#app&#x27;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">App.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;router-view /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">router.ts</span><br><span class="line">import &#123; createRouter, createWebHistory &#125; from &#x27;vue-router&#x27;</span><br><span class="line"></span><br><span class="line">const router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(import.meta.env.BASE_URL),</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#x27;/&#x27;,</span><br><span class="line">      redirect: &#x27;/login&#x27;,   // 访问根路径时直接跳到 /login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#x27;/login&#x27;,</span><br><span class="line">      name: &#x27;Login&#x27;,</span><br><span class="line">      component: () =&gt; import(&#x27;@/views/login.vue&#x27;),  // 或 import(&#x27;@/src/login.vue&#x27;) 视你路径而定</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default router</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">login.vue</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;login-wrap&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;login-card&quot;&gt;</span><br><span class="line">        &lt;h2 class=&quot;title&quot;&gt;登录&lt;/h2&gt;</span><br><span class="line">        &lt;el-form label-position=&quot;top&quot; class=&quot;login-form&quot;&gt;</span><br><span class="line">          &lt;el-form-item label=&quot;用户名&quot;&gt;</span><br><span class="line">            &lt;el-input</span><br><span class="line">              v-model=&quot;username&quot;</span><br><span class="line">              placeholder=&quot;请输入用户名&quot;</span><br><span class="line">              clearable</span><br><span class="line">            /&gt;</span><br><span class="line">          &lt;/el-form-item&gt;</span><br><span class="line">          &lt;el-form-item label=&quot;密码&quot;&gt;</span><br><span class="line">            &lt;el-input</span><br><span class="line">              v-model=&quot;password&quot;</span><br><span class="line">              type=&quot;password&quot;</span><br><span class="line">              placeholder=&quot;请输入密码&quot;</span><br><span class="line">              show-password</span><br><span class="line">              clearable</span><br><span class="line">            /&gt;</span><br><span class="line">          &lt;/el-form-item&gt;</span><br><span class="line">          &lt;el-form-item&gt;</span><br><span class="line">            &lt;el-button type=&quot;primary&quot; class=&quot;submit-btn&quot; @click=&quot;login&quot;&gt;</span><br><span class="line">              登 录</span><br><span class="line">            &lt;/el-button&gt;</span><br><span class="line">          &lt;/el-form-item&gt;</span><br><span class="line">        &lt;/el-form&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">  import &#123; ref &#125; from &#x27;vue&#x27;</span><br><span class="line">  import &#123; useUserStore &#125; from &#x27;@/stores/user&#x27;</span><br><span class="line">  </span><br><span class="line">  const userStore = useUserStore()</span><br><span class="line">  const username = ref(userStore.state.name ?? &#x27;&#x27;)</span><br><span class="line">  const password = ref(userStore.state.password ?? &#x27;&#x27;)</span><br><span class="line">  </span><br><span class="line">  const login = () =&gt; &#123;</span><br><span class="line">    console.log(username.value, password.value)</span><br><span class="line">  &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;style scoped lang=&quot;scss&quot; src=&quot;../styles/login.css&quot;&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">user.ts</span><br><span class="line"></span><br><span class="line">import &#123; ref, computed &#125; from &#x27;vue&#x27;</span><br><span class="line">import &#123; defineStore &#125; from &#x27;pinia&#x27;</span><br><span class="line"></span><br><span class="line">export const useUserStore = defineStore(&#x27;user&#x27;, () =&gt; &#123;</span><br><span class="line">    const state = ref(&#123;</span><br><span class="line">        name:&quot;Tom&quot;,</span><br><span class="line">        password:&quot;123456&quot;</span><br><span class="line">      &#125;)</span><br><span class="line">    return &#123;</span><br><span class="line">        state</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">login.css</span><br><span class="line"></span><br><span class="line">.login-wrap &#123;</span><br><span class="line">    min-height: 100vh;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items: center;</span><br><span class="line">    background: #f5f7fa;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .login-card &#123;</span><br><span class="line">    width: 400px;</span><br><span class="line">    padding: 32px;</span><br><span class="line">    background: #fff;</span><br><span class="line">    border-radius: 8px;</span><br><span class="line">    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .title &#123;</span><br><span class="line">    margin: 0 0 24px 0;</span><br><span class="line">    font-size: 20px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    color: #303133;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .login-form &#123;</span><br><span class="line">    margin-top: 8px;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  .submit-btn &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmmrdj6f0000nkclu4dzpcbib" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -154,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmmhltap3000bgclu1th8drh8" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmmrdj6ey000bkclue0k80a8r" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -202,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmmhltap30008gclu6lc3f4fu" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmmrdj6ex0008kclugw4v9ht7" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -259,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmmhltap20007gclucr101uuu" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmmrdj6ex0007kclu5s16ait7" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -324,7 +383,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmmhltap20005gclu9euagxzn" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmmrdj6ew0005kclud7nyfpd5" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -382,7 +441,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmmhltap20004gcluc0elf09p" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmmrdj6ew0004kclu5ynhfj6j" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -432,7 +491,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmmhltap5000jgclu8r954647" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmmrdj6ez000jkcluhzy09ajx" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -492,7 +551,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmmhltap4000ggclughwv80ho" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy2/" data-id="cmmrdj6ez000gkclu4737g9l2" data-title="python文法" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -655,185 +714,7 @@ print(result)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmmhltap10003gclu3bsaegr4" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-javaTread1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2025/06/29/javaTread1/" class="article-date">
-  <time class="dt-published" datetime="2025-06-29T07:29:51.000Z" itemprop="datePublished">2025-06-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-Java/">技術(Java)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2025/06/29/javaTread1/">Java线程基础（创建、生命周期、状态）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>①代码例子<br>public class RunnableExample {</p>
-<pre><code>// 实现Runnable接口
-public static class MyRunnable implements Runnable &#123;
-    private String taskName;
-    
-    public MyRunnable(String name) &#123;
-        this.taskName = name;
-    &#125;
-    
-    @Override
-    public void run() &#123;
-        System.out.println(&quot;任务 &quot; + taskName + &quot; 开始执行&quot;);
-        try &#123;
-            for (int i = 0; i &lt; 3; i++) &#123;
-                System.out.println(taskName + &quot; 执行第 &quot; + (i + 1) + &quot; 次&quot;);
-                Thread.sleep(500);
-            &#125;
-        &#125; catch (InterruptedException e) &#123;
-            System.out.println(taskName + &quot; 被中断&quot;);
-            Thread.currentThread().interrupt();
-        &#125;
-        System.out.println(&quot;任务 &quot; + taskName + &quot; 执行完成&quot;);
-    &#125;
-&#125;
-
-public static void main(String[] args) &#123;
-    // 创建Runnable对象
-    MyRunnable task1 = new MyRunnable(&quot;Task-1&quot;);
-    MyRunnable task2 = new MyRunnable(&quot;Task-2&quot;);
-    
-    // 创建线程并传入Runnable
-    Thread thread1 = new Thread(task1);
-    Thread thread2 = new Thread(task2);
-    
-    // 启动线程
-    thread1.start();
-    thread2.start();
-&#125;
-</code></pre>
-<p>}</p>
-<p>②线程的生命周期<br>public enum ThreadState {<br>    NEW,           &#x2F;&#x2F; 新建状态<br>    RUNNABLE,      &#x2F;&#x2F; 可运行状态<br>    BLOCKED,       &#x2F;&#x2F; 阻塞状态<br>    WAITING,       &#x2F;&#x2F; 等待状态<br>    TIMED_WAITING, &#x2F;&#x2F; 计时等待状态<br>    TERMINATED     &#x2F;&#x2F; 终止状态<br>}</p>
-<p>③通过线程状态监听，观察线程的生命周期<br>public class CompleteLifecycleExample {</p>
-<pre><code>private static final Object lock = new Object();
-
-public static class LifecycleThread extends Thread &#123;
-    private final String threadName;
-    
-    public LifecycleThread(String name) &#123;
-        this.threadName = name;
-    &#125;
-    
-    @Override
-    public void run() &#123;
-        System.out.println(threadName + &quot; 进入RUNNABLE状态&quot;);
-        
-        try &#123;
-            // 1. 进入TIMED_WAITING状态
-            System.out.println(threadName + &quot; 准备进入TIMED_WAITING状态&quot;);
-            Thread.sleep(1000);
-            System.out.println(threadName + &quot; 从TIMED_WAITING状态恢复&quot;);
-            
-            // 2. 进入BLOCKED状态
-            System.out.println(threadName + &quot; 准备进入BLOCKED状态&quot;);
-            synchronized (lock) &#123;
-                System.out.println(threadName + &quot; 获得锁，执行同步代码&quot;);
-                Thread.sleep(500);
-            &#125;
-            System.out.println(threadName + &quot; 释放锁&quot;);
-            
-            // 3. 进入WAITING状态
-            System.out.println(threadName + &quot; 准备进入WAITING状态&quot;);
-            synchronized (lock) &#123;
-                lock.wait(2000); // 等待2秒
-            &#125;
-            System.out.println(threadName + &quot; 从WAITING状态恢复&quot;);
-            
-            // 4. 再次进入BLOCKED状态
-            System.out.println(threadName + &quot; 准备再次进入BLOCKED状态&quot;);
-            synchronized (lock) &#123;
-                System.out.println(threadName + &quot; 再次获得锁&quot;);
-                Thread.sleep(500);
-            &#125;
-            
-        &#125; catch (InterruptedException e) &#123;
-            System.out.println(threadName + &quot; 被中断&quot;);
-            Thread.currentThread().interrupt();
-        &#125;
-        
-        System.out.println(threadName + &quot; 即将进入TERMINATED状态&quot;);
-    &#125;
-&#125;
-
-public static void main(String[] args) throws InterruptedException &#123;
-    LifecycleThread thread = new LifecycleThread(&quot;LifecycleThread&quot;);
-    
-    // 1. NEW状态
-    System.out.println(&quot;初始状态: &quot; + thread.getState()); // NEW
-    
-    // 2. 启动线程，进入RUNNABLE状态
-    thread.start();
-    System.out.println(&quot;启动后状态: &quot; + thread.getState()); // RUNNABLE
-    
-    // 3. 监控状态变化
-    while (thread.isAlive()) &#123;
-        Thread.State state = thread.getState();
-        System.out.println(&quot;当前状态: &quot; + state);
-        
-        switch (state) &#123;
-            case NEW:
-                System.out.println(&quot;线程已创建但未启动&quot;);
-                break;
-            case RUNNABLE:
-                System.out.println(&quot;线程正在运行或等待CPU&quot;);
-                break;
-            case BLOCKED:
-                System.out.println(&quot;线程等待获取锁&quot;);
-                break;
-            case WAITING:
-                System.out.println(&quot;线程等待其他线程通知&quot;);
-                break;
-            case TIMED_WAITING:
-                System.out.println(&quot;线程等待指定时间&quot;);
-                break;
-            case TERMINATED:
-                System.out.println(&quot;线程已终止&quot;);
-                break;
-        &#125;
-        
-        Thread.sleep(500);
-    &#125;
-    
-    // 4. TERMINATED状态
-    System.out.println(&quot;最终状态: &quot; + thread.getState()); // TERMINATED
-&#125;
-</code></pre>
-<p>}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmmhltap4000cgclu3gwbd8h0" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmmrdj6ew0003kclu4oqz8ojz" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -892,6 +773,10 @@ public static void main(String[] args) throws InterruptedException &#123;
           </li>
         
           <li>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2026/03/01/fastAPI5/">fastAPI cookie和header取得</a>
           </li>
         
@@ -901,10 +786,6 @@ public static void main(String[] args) throws InterruptedException &#123;
         
           <li>
             <a href="/my-blog/2026/02/28/fastAPI3/">fastAPI参数验证</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2026/02/23/fastAPI2/">fastAPI参数</a>
           </li>
         
       </ul>

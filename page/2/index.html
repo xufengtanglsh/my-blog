@@ -71,6 +71,184 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-javaTread1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2025/06/29/javaTread1/" class="article-date">
+  <time class="dt-published" datetime="2025-06-29T07:29:51.000Z" itemprop="datePublished">2025-06-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-Java/">技術(Java)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2025/06/29/javaTread1/">Java线程基础（创建、生命周期、状态）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①代码例子<br>public class RunnableExample {</p>
+<pre><code>// 实现Runnable接口
+public static class MyRunnable implements Runnable &#123;
+    private String taskName;
+    
+    public MyRunnable(String name) &#123;
+        this.taskName = name;
+    &#125;
+    
+    @Override
+    public void run() &#123;
+        System.out.println(&quot;任务 &quot; + taskName + &quot; 开始执行&quot;);
+        try &#123;
+            for (int i = 0; i &lt; 3; i++) &#123;
+                System.out.println(taskName + &quot; 执行第 &quot; + (i + 1) + &quot; 次&quot;);
+                Thread.sleep(500);
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            System.out.println(taskName + &quot; 被中断&quot;);
+            Thread.currentThread().interrupt();
+        &#125;
+        System.out.println(&quot;任务 &quot; + taskName + &quot; 执行完成&quot;);
+    &#125;
+&#125;
+
+public static void main(String[] args) &#123;
+    // 创建Runnable对象
+    MyRunnable task1 = new MyRunnable(&quot;Task-1&quot;);
+    MyRunnable task2 = new MyRunnable(&quot;Task-2&quot;);
+    
+    // 创建线程并传入Runnable
+    Thread thread1 = new Thread(task1);
+    Thread thread2 = new Thread(task2);
+    
+    // 启动线程
+    thread1.start();
+    thread2.start();
+&#125;
+</code></pre>
+<p>}</p>
+<p>②线程的生命周期<br>public enum ThreadState {<br>    NEW,           &#x2F;&#x2F; 新建状态<br>    RUNNABLE,      &#x2F;&#x2F; 可运行状态<br>    BLOCKED,       &#x2F;&#x2F; 阻塞状态<br>    WAITING,       &#x2F;&#x2F; 等待状态<br>    TIMED_WAITING, &#x2F;&#x2F; 计时等待状态<br>    TERMINATED     &#x2F;&#x2F; 终止状态<br>}</p>
+<p>③通过线程状态监听，观察线程的生命周期<br>public class CompleteLifecycleExample {</p>
+<pre><code>private static final Object lock = new Object();
+
+public static class LifecycleThread extends Thread &#123;
+    private final String threadName;
+    
+    public LifecycleThread(String name) &#123;
+        this.threadName = name;
+    &#125;
+    
+    @Override
+    public void run() &#123;
+        System.out.println(threadName + &quot; 进入RUNNABLE状态&quot;);
+        
+        try &#123;
+            // 1. 进入TIMED_WAITING状态
+            System.out.println(threadName + &quot; 准备进入TIMED_WAITING状态&quot;);
+            Thread.sleep(1000);
+            System.out.println(threadName + &quot; 从TIMED_WAITING状态恢复&quot;);
+            
+            // 2. 进入BLOCKED状态
+            System.out.println(threadName + &quot; 准备进入BLOCKED状态&quot;);
+            synchronized (lock) &#123;
+                System.out.println(threadName + &quot; 获得锁，执行同步代码&quot;);
+                Thread.sleep(500);
+            &#125;
+            System.out.println(threadName + &quot; 释放锁&quot;);
+            
+            // 3. 进入WAITING状态
+            System.out.println(threadName + &quot; 准备进入WAITING状态&quot;);
+            synchronized (lock) &#123;
+                lock.wait(2000); // 等待2秒
+            &#125;
+            System.out.println(threadName + &quot; 从WAITING状态恢复&quot;);
+            
+            // 4. 再次进入BLOCKED状态
+            System.out.println(threadName + &quot; 准备再次进入BLOCKED状态&quot;);
+            synchronized (lock) &#123;
+                System.out.println(threadName + &quot; 再次获得锁&quot;);
+                Thread.sleep(500);
+            &#125;
+            
+        &#125; catch (InterruptedException e) &#123;
+            System.out.println(threadName + &quot; 被中断&quot;);
+            Thread.currentThread().interrupt();
+        &#125;
+        
+        System.out.println(threadName + &quot; 即将进入TERMINATED状态&quot;);
+    &#125;
+&#125;
+
+public static void main(String[] args) throws InterruptedException &#123;
+    LifecycleThread thread = new LifecycleThread(&quot;LifecycleThread&quot;);
+    
+    // 1. NEW状态
+    System.out.println(&quot;初始状态: &quot; + thread.getState()); // NEW
+    
+    // 2. 启动线程，进入RUNNABLE状态
+    thread.start();
+    System.out.println(&quot;启动后状态: &quot; + thread.getState()); // RUNNABLE
+    
+    // 3. 监控状态变化
+    while (thread.isAlive()) &#123;
+        Thread.State state = thread.getState();
+        System.out.println(&quot;当前状态: &quot; + state);
+        
+        switch (state) &#123;
+            case NEW:
+                System.out.println(&quot;线程已创建但未启动&quot;);
+                break;
+            case RUNNABLE:
+                System.out.println(&quot;线程正在运行或等待CPU&quot;);
+                break;
+            case BLOCKED:
+                System.out.println(&quot;线程等待获取锁&quot;);
+                break;
+            case WAITING:
+                System.out.println(&quot;线程等待其他线程通知&quot;);
+                break;
+            case TIMED_WAITING:
+                System.out.println(&quot;线程等待指定时间&quot;);
+                break;
+            case TERMINATED:
+                System.out.println(&quot;线程已终止&quot;);
+                break;
+        &#125;
+        
+        Thread.sleep(500);
+    &#125;
+    
+    // 4. TERMINATED状态
+    System.out.println(&quot;最终状态: &quot; + thread.getState()); // TERMINATED
+&#125;
+</code></pre>
+<p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/29/javaTread1/" data-id="cmmrdj6ey000ckcluhcctc3ro" data-title="Java线程基础（创建、生命周期、状态）" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-dataBase1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2025/06/23/dataBase1/" class="article-date">
@@ -111,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmmhltap00001gcluhnkqhs3k" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/06/23/dataBase1/" data-id="cmmrdj6ev0001kcluchiw8oe0" data-title="sqlserverのデータ導入と導出" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -195,7 +373,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmmhltap4000fgcluchiig80u" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/10/pythonStudy1/" data-id="cmmrdj6ez000fkclu0r0efo7w" data-title="python特有数据类型" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -240,7 +418,7 @@ memoryview：内存实图处理和共享二进制数据
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmmhltaoy0000gclu6h9364xy" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/05/06/Hexo/" data-id="cmmrdj6es0000kclu867r5vxi" data-title="HEROの常用コマンド" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -299,6 +477,10 @@ memoryview：内存实图处理和共享二进制数据
           </li>
         
           <li>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2026/03/01/fastAPI5/">fastAPI cookie和header取得</a>
           </li>
         
@@ -308,10 +490,6 @@ memoryview：内存实图处理和共享二进制数据
         
           <li>
             <a href="/my-blog/2026/02/28/fastAPI3/">fastAPI参数验证</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2026/02/23/fastAPI2/">fastAPI参数</a>
           </li>
         
       </ul>
