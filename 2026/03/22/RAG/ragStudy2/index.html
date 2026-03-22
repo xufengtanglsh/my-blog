@@ -6,15 +6,15 @@
   
   <title>langChain基础 | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4 专门用来解析 HTML &#x2F; XML 的 Python 库  ②切片代码 loader &#x3D;">
+  <meta name="description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4 专门用来解析 HTML &#x2F; XML 的 Python 库  ②切片代码 12345678">
 <meta property="og:type" content="article">
 <meta property="og:title" content="langChain基础">
 <meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/index.html">
 <meta property="og:site_name" content="johouブログ">
-<meta property="og:description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4 专门用来解析 HTML &#x2F; XML 的 Python 库  ②切片代码 loader &#x3D;">
+<meta property="og:description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4 专门用来解析 HTML &#x2F; XML 的 Python 库  ②切片代码 12345678">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2026-03-22T06:04:25.000Z">
-<meta property="article:modified_time" content="2026-03-22T06:57:52.469Z">
+<meta property="article:modified_time" content="2026-03-22T07:17:55.231Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -101,27 +101,80 @@
       
         <p>①在venv环境中安装langchain<br>    pip install langchain<br>    pip install langchain-community<br>    pip install langchain-text-splitters<br>    pip install beautifulsoup4 专门用来解析 HTML &#x2F; XML 的 Python 库</p>
 <p> ②切片代码</p>
-<pre><code>loader = WebBaseLoader(url)
-docs = loader.load()
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">loader = WebBaseLoader(url)</span><br><span class="line">docs = loader.load()</span><br><span class="line"></span><br><span class="line">text_splitter =  RecursiveCharacterTextSplitter(</span><br><span class="line"></span><br><span class="line">chunk_size=500,</span><br><span class="line">chunk_overlap=100,</span><br><span class="line">separators=[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;.&quot;, &quot; &quot;])</span><br><span class="line"></span><br><span class="line">chunks = text_splitter.split_documents(docs)</span><br><span class="line">print(f&quot;Total chunks: &#123;len(chunks)&#125;&quot;)</span><br><span class="line">for i, chunk in enumerate(chunks):</span><br><span class="line">    print(f&quot;\nChunk &#123;i&#125;:&quot;)</span><br><span class="line">    print(chunk.page_content)   </span><br></pre></td></tr></table></figure>
 
-text_splitter =  RecursiveCharacterTextSplitter(
-
-chunk_size=500,
-chunk_overlap=100,
-separators=[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;.&quot;, &quot; &quot;])
-
-chunks = text_splitter.split_documents(docs)
-print(f&quot;Total chunks: &#123;len(chunks)&#125;&quot;)
-for i, chunk in enumerate(chunks):
-    print(f&quot;\nChunk &#123;i&#125;:&quot;)
-    print(chunk.page_content)   
-</code></pre>
 <p>关于separators参数解释<br>按优先级从高到低 的「切分符」。切分时会 尽量先在更靠前的分隔符上断开<br>1	\n\n	空行 &#x2F; 段落：优先在段落之间断开，大块语义最完整。<br>2	\n	单行换行：段落内再拆成行。<br>3	。	中文（日文等）句号：按句切。<br>4	.	英文句号（小数点也可能被误切，视文本而定）。<br>5	“ “	空格：常见于英文单词之间；中文一般没有空格，这一步对中文帮助小，但作为最后手段仍可把超长串硬拆小。</p>
+<p>切分的思路</p>
+<h2 id="1-按文档结构切，而不是只按长度"><a href="#1-按文档结构切，而不是只按长度" class="headerlink" title="1. 按文档结构切，而不是只按长度"></a><strong>1. 按文档结构切，而不是只按长度</strong></h2><ul>
+<li><p><strong>Markdown &#x2F; HTML</strong>：尽量按标题（#、##）、<section> 等切块，再在块内用 RecursiveCharacterTextSplitter 控制上限。</p>
+</li>
+<li><p><strong>PDF</strong>：若有版面信息，按页&#x2F;段优于纯字符硬切。</p>
+</li>
+<li><p><strong>原因</strong>：一块里主题越单一，向量语义越集中，和用户问题越容易「对上」。</p>
+</li>
+</ul>
+<p>LangChain 里可考虑 <strong>MarkdownHeaderTextSplitter</strong>、<strong>HTMLHeaderTextSplitter</strong> 等与递归切分组合。</p>
+<hr>
+<h2 id="2-separators-贴合你的语言与排版"><a href="#2-separators-贴合你的语言与排版" class="headerlink" title="2. separators 贴合你的语言与排版"></a><strong>2. separators 贴合你的语言与排版</strong></h2><ul>
+<li><p>中文为主：把 <strong>。、！、？</strong> 等放进列表，顺序在 . 之前或并列。</p>
+</li>
+<li><p>技术文档：可加 <strong>\n- 、\n1.</strong>（列表）等，避免把一条列表拆成两半。</p>
+</li>
+<li><p>先 <strong>段落 \n\n</strong> 再 <strong>句末</strong>，再 <strong>空格</strong>，和之前说的一样：<strong>先语义大块，再细切</strong>。</p>
+</li>
+</ul>
+<hr>
+<h2 id="3-用-chunk-overlap，减少「关键句卡在边界」"><a href="#3-用-chunk-overlap，减少「关键句卡在边界」" class="headerlink" title="3. 用 chunk_overlap，减少「关键句卡在边界」"></a><strong>3. 用 chunk_overlap，减少「关键句卡在边界」</strong></h2><ul>
+<li><p>问答句刚好跨两个 chunk 时，没有 overlap 容易 <strong>两边都搜不到或只搜到半句</strong>。</p>
+</li>
+<li><p>常见起点：<strong>overlap ≈ chunk 的 10%～20%</strong>，再按召回结果微调。</p>
+</li>
+</ul>
+<hr>
+<h2 id="4-控制的是「语义单位」，优先用-token-意识（长文本时）"><a href="#4-控制的是「语义单位」，优先用-token-意识（长文本时）" class="headerlink" title="4. 控制的是「语义单位」，优先用 token 意识（长文本时）"></a><strong>4. 控制的是「语义单位」，优先用 token 意识（长文本时）</strong></h2><ul>
+<li><p>默认按 <strong>字符</strong> 的 chunk_size，和 embedding 的 <strong>token 上限</strong> 不是一回事。</p>
+</li>
+<li><p>中文密集文本：用 tokenizer 抽几条 chunk 看 token 数，避免顶满模型上限或浪费上下文。</p>
+</li>
+<li><p>需要时改用 <strong>按 token 切</strong> 的 splitter，和所用 embedding 模型一致。</p>
+</li>
+</ul>
+<hr>
+<h2 id="5-元数据（metadata）比「切得更碎」更能提升「精确感」"><a href="#5-元数据（metadata）比「切得更碎」更能提升「精确感」" class="headerlink" title="5. 元数据（metadata）比「切得更碎」更能提升「精确感」"></a><strong>5. 元数据（metadata）比「切得更碎」更能提升「精确感」</strong></h2><p>切片时给每条 chunk 带上 <strong>source（URL&#x2F;文件名）、title、section、page</strong> 等，检索后可以：</p>
+<ul>
+<li><p><strong>按元数据过滤</strong>（只搜某文档、某章节）；</p>
+</li>
+<li><p>把标题拼进 chunk 正文前一行（<strong>「假标题」</strong>），向量里带上章节语义。</p>
+</li>
+</ul>
+<p>LangChain 的 Document 支持 metadata，很多 loader 已带部分字段。</p>
+<hr>
+<h2 id="6-小-chunk-检索-大-chunk-喂给-LLM（parent-document）"><a href="#6-小-chunk-检索-大-chunk-喂给-LLM（parent-document）" class="headerlink" title="6. 小 chunk 检索 + 大 chunk 喂给 LLM（parent document）"></a><strong>6. 小 chunk 检索 + 大 chunk 喂给 LLM（parent document）</strong></h2><ul>
+<li><p><strong>索引用小 chunk</strong>（向量更准、定位更细）。</p>
+</li>
+<li><p>命中后取 <strong>父级大段或整节</strong> 再送给 LLM，避免上下文不够。</p>
+</li>
+</ul>
+<p>LangChain 里有 <strong>Parent Document Retriever</strong> 一类模式；思路是「检索细、阅读粗」。</p>
+<hr>
+<h2 id="7-清洗再切：减少噪声向量"><a href="#7-清洗再切：减少噪声向量" class="headerlink" title="7. 清洗再切：减少噪声向量"></a><strong>7. 清洗再切：减少噪声向量</strong></h2><ul>
+<li><p>导航栏、页脚、版权声明、重复模板，切进去会变成 <strong>高频但无意义</strong> 的块，冲淡检索。</p>
+</li>
+<li><p>WebBaseLoader 可先 <strong>BeautifulSoup 去 nav&#x2F;footer</strong>，或只取 main 区域再 split。</p>
+</li>
+</ul>
+<hr>
+<h2 id="8-用实验闭环，而不是一次定死参数"><a href="#8-用实验闭环，而不是一次定死参数" class="headerlink" title="8. 用实验闭环，而不是一次定死参数"></a><strong>8. 用实验闭环，而不是一次定死参数</strong></h2><ul>
+<li><p>固定一批 <strong>真实用户问题</strong>，看：Top-k 里是否总出现「该在的段落」。</p>
+</li>
+<li><p>调整 <strong>chunk_size &#x2F; overlap &#x2F; 分隔符 &#x2F; 是否按标题切</strong>，对比命中率再定。 —<strong>一句话：</strong> 想更精确，优先 按标题&#x2F;段落结构切 + 合理 overlap + 丰富 metadata（必要时父文档），其次才是微调 chunk_size；<strong>干净正文</strong>比盲目切更碎更重要。**</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1enhbg000nctlud1210ex0" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1fdmsl000nm3lucpfbfnr0" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
