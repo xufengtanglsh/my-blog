@@ -6,15 +6,15 @@
   
   <title>langChain基础 | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码 12345678910111213141516loader &#x3D; WebBaseLoa">
+  <meta name="description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码    loader &#x3D; WebBaseLoader(url) docs &#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="langChain基础">
 <meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/index.html">
 <meta property="og:site_name" content="johouブログ">
-<meta property="og:description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码 12345678910111213141516loader &#x3D; WebBaseLoa">
+<meta property="og:description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码    loader &#x3D; WebBaseLoader(url) docs &#x3D;">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2026-03-22T06:04:25.000Z">
-<meta property="article:modified_time" content="2026-03-22T06:39:38.620Z">
+<meta property="article:modified_time" content="2026-03-22T06:40:28.788Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -100,12 +100,27 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>①在venv环境中安装langchain<br>    pip install langchain<br>    pip install langchain-community<br>    pip install langchain-text-splitters<br>    pip install beautifulsoup4</p>
-<p> ②切片代码<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">loader = WebBaseLoader(url)</span><br><span class="line">    </span><br><span class="line">docs = loader.load()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">text_splitter =  RecursiveCharacterTextSplitter(</span><br><span class="line"></span><br><span class="line">chunk_size=500,</span><br><span class="line">chunk_overlap=100,</span><br><span class="line">separators=[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;.&quot;, &quot; &quot;])</span><br><span class="line"></span><br><span class="line">chunks = text_splitter.split_documents(docs)</span><br><span class="line">print(f&quot;Total chunks: &#123;len(chunks)&#125;&quot;)</span><br><span class="line">for i, chunk in enumerate(chunks):</span><br><span class="line">    print(f&quot;\nChunk &#123;i&#125;:&quot;)</span><br><span class="line">    print(chunk.page_content)   </span><br></pre></td></tr></table></figure></p>
+<p> ②切片代码<br>    loader &#x3D; WebBaseLoader(url)</p>
+<pre><code>docs = loader.load()
+
+
+text_splitter =  RecursiveCharacterTextSplitter(
+
+chunk_size=500,
+chunk_overlap=100,
+separators=[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;.&quot;, &quot; &quot;])
+
+chunks = text_splitter.split_documents(docs)
+print(f&quot;Total chunks: &#123;len(chunks)&#125;&quot;)
+for i, chunk in enumerate(chunks):
+    print(f&quot;\nChunk &#123;i&#125;:&quot;)
+    print(chunk.page_content)   
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1e0b2y000prklu7vj92deg" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1e118h000l6bluatt433pm" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       

@@ -98,12 +98,27 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>①在venv环境中安装langchain<br>    pip install langchain<br>    pip install langchain-community<br>    pip install langchain-text-splitters<br>    pip install beautifulsoup4</p>
-<p> ②切片代码<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">loader = WebBaseLoader(url)</span><br><span class="line">    </span><br><span class="line">docs = loader.load()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">text_splitter =  RecursiveCharacterTextSplitter(</span><br><span class="line"></span><br><span class="line">chunk_size=500,</span><br><span class="line">chunk_overlap=100,</span><br><span class="line">separators=[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;.&quot;, &quot; &quot;])</span><br><span class="line"></span><br><span class="line">chunks = text_splitter.split_documents(docs)</span><br><span class="line">print(f&quot;Total chunks: &#123;len(chunks)&#125;&quot;)</span><br><span class="line">for i, chunk in enumerate(chunks):</span><br><span class="line">    print(f&quot;\nChunk &#123;i&#125;:&quot;)</span><br><span class="line">    print(chunk.page_content)   </span><br></pre></td></tr></table></figure></p>
+<p> ②切片代码<br>    loader &#x3D; WebBaseLoader(url)</p>
+<pre><code>docs = loader.load()
+
+
+text_splitter =  RecursiveCharacterTextSplitter(
+
+chunk_size=500,
+chunk_overlap=100,
+separators=[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;.&quot;, &quot; &quot;])
+
+chunks = text_splitter.split_documents(docs)
+print(f&quot;Total chunks: &#123;len(chunks)&#125;&quot;)
+for i, chunk in enumerate(chunks):
+    print(f&quot;\nChunk &#123;i&#125;:&quot;)
+    print(chunk.page_content)   
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1e0b2y000prklu7vj92deg" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1e118h000l6bluatt433pm" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -148,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmn1e0b2x000krklu6zjx2s11" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmn1e118h000g6blucwcz7q6z" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -199,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmn1e0b2y000nrkludb653mi2" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmn1e118i000o6blu6bveb4sl" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -258,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmn1e0b300016rklua1wa6a4p" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmn1e118i000q6bluad0k6bq3" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -302,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmn1e0b2w000brkluawned4ve" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmn1e118f00076blu73ivafkj" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -350,7 +365,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmn1e0b2v0008rklu3shg926s" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmn1e118i000t6blu8qil4c7h" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -407,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmn1e0b2u0007rklu08344zbf" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmn1e118e00056blu9bzl7mox" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -472,7 +487,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmn1e0b2u0005rklu8yf287uj" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmn1e118e00036blu52ax3upt" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -530,7 +545,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmn1e0b2u0004rklu13300f1y" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmn1e118h000j6blud0bwf4is" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -580,7 +595,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmn1e0b2x000jrkluao9q9r73" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmn1e118g000f6blu0une8xmr" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
