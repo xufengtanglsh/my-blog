@@ -14,7 +14,7 @@
 <meta property="og:description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4 专门用来解析 HTML &#x2F; XML 的 Python 库  ②切片代码 12345678">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2026-03-22T06:04:25.000Z">
-<meta property="article:modified_time" content="2026-03-22T07:17:55.231Z">
+<meta property="article:modified_time" content="2026-03-22T07:28:35.810Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -104,77 +104,193 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">loader = WebBaseLoader(url)</span><br><span class="line">docs = loader.load()</span><br><span class="line"></span><br><span class="line">text_splitter =  RecursiveCharacterTextSplitter(</span><br><span class="line"></span><br><span class="line">chunk_size=500,</span><br><span class="line">chunk_overlap=100,</span><br><span class="line">separators=[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;.&quot;, &quot; &quot;])</span><br><span class="line"></span><br><span class="line">chunks = text_splitter.split_documents(docs)</span><br><span class="line">print(f&quot;Total chunks: &#123;len(chunks)&#125;&quot;)</span><br><span class="line">for i, chunk in enumerate(chunks):</span><br><span class="line">    print(f&quot;\nChunk &#123;i&#125;:&quot;)</span><br><span class="line">    print(chunk.page_content)   </span><br></pre></td></tr></table></figure>
 
 <p>关于separators参数解释<br>按优先级从高到低 的「切分符」。切分时会 尽量先在更靠前的分隔符上断开<br>1	\n\n	空行 &#x2F; 段落：优先在段落之间断开，大块语义最完整。<br>2	\n	单行换行：段落内再拆成行。<br>3	。	中文（日文等）句号：按句切。<br>4	.	英文句号（小数点也可能被误切，视文本而定）。<br>5	“ “	空格：常见于英文单词之间；中文一般没有空格，这一步对中文帮助小，但作为最后手段仍可把超长串硬拆小。</p>
-<p>切分的思路</p>
+<p>②切分的思路</p>
 <h2 id="1-按文档结构切，而不是只按长度"><a href="#1-按文档结构切，而不是只按长度" class="headerlink" title="1. 按文档结构切，而不是只按长度"></a><strong>1. 按文档结构切，而不是只按长度</strong></h2><ul>
-<li><p><strong>Markdown &#x2F; HTML</strong>：尽量按标题（#、##）、<section> 等切块，再在块内用 RecursiveCharacterTextSplitter 控制上限。</p>
-</li>
-<li><p><strong>PDF</strong>：若有版面信息，按页&#x2F;段优于纯字符硬切。</p>
-</li>
-<li><p><strong>原因</strong>：一块里主题越单一，向量语义越集中，和用户问题越容易「对上」。</p>
-</li>
+<li><strong>Markdown &#x2F; HTML</strong>：尽量按标题（#、##）、 等切块，再在块内用 RecursiveCharacterTextSplitter 控制上限。</li>
+<li><strong>PDF</strong>：若有版面信息，按页&#x2F;段优于纯字符硬切。</li>
+<li><strong>原因</strong>：一块里主题越单一，向量语义越集中，和用户问题越容易「对上」。</li>
 </ul>
 <p>LangChain 里可考虑 <strong>MarkdownHeaderTextSplitter</strong>、<strong>HTMLHeaderTextSplitter</strong> 等与递归切分组合。</p>
 <hr>
 <h2 id="2-separators-贴合你的语言与排版"><a href="#2-separators-贴合你的语言与排版" class="headerlink" title="2. separators 贴合你的语言与排版"></a><strong>2. separators 贴合你的语言与排版</strong></h2><ul>
-<li><p>中文为主：把 <strong>。、！、？</strong> 等放进列表，顺序在 . 之前或并列。</p>
-</li>
-<li><p>技术文档：可加 <strong>\n- 、\n1.</strong>（列表）等，避免把一条列表拆成两半。</p>
-</li>
-<li><p>先 <strong>段落 \n\n</strong> 再 <strong>句末</strong>，再 <strong>空格</strong>，和之前说的一样：<strong>先语义大块，再细切</strong>。</p>
-</li>
+<li>中文为主：把 <strong>。、！、？</strong> 等放进列表，顺序在 . 之前或并列。</li>
+<li>技术文档：可加 <strong>\n- 、\n1.</strong>（列表）等，避免把一条列表拆成两半。</li>
+<li>先 <strong>段落 \n\n</strong> 再 <strong>句末</strong>，再 <strong>空格</strong>，和之前说的一样：<strong>先语义大块，再细切</strong>。</li>
 </ul>
 <hr>
 <h2 id="3-用-chunk-overlap，减少「关键句卡在边界」"><a href="#3-用-chunk-overlap，减少「关键句卡在边界」" class="headerlink" title="3. 用 chunk_overlap，减少「关键句卡在边界」"></a><strong>3. 用 chunk_overlap，减少「关键句卡在边界」</strong></h2><ul>
-<li><p>问答句刚好跨两个 chunk 时，没有 overlap 容易 <strong>两边都搜不到或只搜到半句</strong>。</p>
-</li>
-<li><p>常见起点：<strong>overlap ≈ chunk 的 10%～20%</strong>，再按召回结果微调。</p>
-</li>
+<li>问答句刚好跨两个 chunk 时，没有 overlap 容易 <strong>两边都搜不到或只搜到半句</strong>。</li>
+<li>常见起点：<strong>overlap ≈ chunk 的 10%～20%</strong>，再按召回结果微调。</li>
 </ul>
 <hr>
 <h2 id="4-控制的是「语义单位」，优先用-token-意识（长文本时）"><a href="#4-控制的是「语义单位」，优先用-token-意识（长文本时）" class="headerlink" title="4. 控制的是「语义单位」，优先用 token 意识（长文本时）"></a><strong>4. 控制的是「语义单位」，优先用 token 意识（长文本时）</strong></h2><ul>
-<li><p>默认按 <strong>字符</strong> 的 chunk_size，和 embedding 的 <strong>token 上限</strong> 不是一回事。</p>
-</li>
-<li><p>中文密集文本：用 tokenizer 抽几条 chunk 看 token 数，避免顶满模型上限或浪费上下文。</p>
-</li>
-<li><p>需要时改用 <strong>按 token 切</strong> 的 splitter，和所用 embedding 模型一致。</p>
-</li>
+<li>默认按 <strong>字符</strong> 的 chunk_size，和 embedding 的 <strong>token 上限</strong> 不是一回事。</li>
+<li>中文密集文本：用 tokenizer 抽几条 chunk 看 token 数，避免顶满模型上限或浪费上下文。</li>
+<li>需要时改用 <strong>按 token 切</strong> 的 splitter，和所用 embedding 模型一致。</li>
 </ul>
 <hr>
 <h2 id="5-元数据（metadata）比「切得更碎」更能提升「精确感」"><a href="#5-元数据（metadata）比「切得更碎」更能提升「精确感」" class="headerlink" title="5. 元数据（metadata）比「切得更碎」更能提升「精确感」"></a><strong>5. 元数据（metadata）比「切得更碎」更能提升「精确感」</strong></h2><p>切片时给每条 chunk 带上 <strong>source（URL&#x2F;文件名）、title、section、page</strong> 等，检索后可以：</p>
 <ul>
-<li><p><strong>按元数据过滤</strong>（只搜某文档、某章节）；</p>
-</li>
-<li><p>把标题拼进 chunk 正文前一行（<strong>「假标题」</strong>），向量里带上章节语义。</p>
-</li>
+<li><strong>按元数据过滤</strong>（只搜某文档、某章节）；</li>
+<li>把标题拼进 chunk 正文前一行（<strong>「假标题」</strong>），向量里带上章节语义。</li>
 </ul>
 <p>LangChain 的 Document 支持 metadata，很多 loader 已带部分字段。</p>
 <hr>
 <h2 id="6-小-chunk-检索-大-chunk-喂给-LLM（parent-document）"><a href="#6-小-chunk-检索-大-chunk-喂给-LLM（parent-document）" class="headerlink" title="6. 小 chunk 检索 + 大 chunk 喂给 LLM（parent document）"></a><strong>6. 小 chunk 检索 + 大 chunk 喂给 LLM（parent document）</strong></h2><ul>
-<li><p><strong>索引用小 chunk</strong>（向量更准、定位更细）。</p>
-</li>
-<li><p>命中后取 <strong>父级大段或整节</strong> 再送给 LLM，避免上下文不够。</p>
-</li>
+<li><strong>索引用小 chunk</strong>（向量更准、定位更细）。</li>
+<li>命中后取 <strong>父级大段或整节</strong> 再送给 LLM，避免上下文不够。</li>
 </ul>
 <p>LangChain 里有 <strong>Parent Document Retriever</strong> 一类模式；思路是「检索细、阅读粗」。</p>
 <hr>
 <h2 id="7-清洗再切：减少噪声向量"><a href="#7-清洗再切：减少噪声向量" class="headerlink" title="7. 清洗再切：减少噪声向量"></a><strong>7. 清洗再切：减少噪声向量</strong></h2><ul>
-<li><p>导航栏、页脚、版权声明、重复模板，切进去会变成 <strong>高频但无意义</strong> 的块，冲淡检索。</p>
-</li>
-<li><p>WebBaseLoader 可先 <strong>BeautifulSoup 去 nav&#x2F;footer</strong>，或只取 main 区域再 split。</p>
-</li>
+<li>导航栏、页脚、版权声明、重复模板，切进去会变成 <strong>高频但无意义</strong> 的块，冲淡检索。</li>
+<li>WebBaseLoader 可先 <strong>BeautifulSoup 去 nav&#x2F;footer</strong>，或只取 main 区域再 split。</li>
 </ul>
 <hr>
 <h2 id="8-用实验闭环，而不是一次定死参数"><a href="#8-用实验闭环，而不是一次定死参数" class="headerlink" title="8. 用实验闭环，而不是一次定死参数"></a><strong>8. 用实验闭环，而不是一次定死参数</strong></h2><ul>
-<li><p>固定一批 <strong>真实用户问题</strong>，看：Top-k 里是否总出现「该在的段落」。</p>
+<li>固定一批 <strong>真实用户问题</strong>，看：Top-k 里是否总出现「该在的段落」。</li>
+<li>调整 <strong>chunk_size &#x2F; overlap &#x2F; 分隔符 &#x2F; 是否按标题切</strong>，对比命中率再定。 —<strong>一句话：</strong> 想更精确，优先 按标题&#x2F;段落结构切 + 合理 overlap + 丰富 metadata（必要时父文档），其次才是微调 chunk_size；<strong>干净正文</strong>比盲目切更碎更重要。**</li>
+</ul>
+<p>③langchain的TextSplitter类型介绍</p>
+<h2 id="1-按字符-递归（最常用）"><a href="#1-按字符-递归（最常用）" class="headerlink" title="1. 按字符 &#x2F; 递归（最常用）"></a><strong>1. 按字符 &#x2F; 递归（最常用）</strong></h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用简述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RecursiveCharacterTextSplitter</strong></td>
+<td>按一组 separators <strong>递归</strong>切，尽量在段落、换行、句号、空格等处断开，兼顾 chunk_size &#x2F; chunk_overlap。RAG 默认首选。</td>
+</tr>
+<tr>
+<td><strong>CharacterTextSplitter</strong></td>
+<td>按<strong>单个</strong>分隔符简单切，不够「聪明」，大块仍可能切得很硬。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-按-Token（对齐模型上限）"><a href="#2-按-Token（对齐模型上限）" class="headerlink" title="2. 按 Token（对齐模型上限）"></a><strong>2. 按 Token（对齐模型上限）</strong></h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用简述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TokenTextSplitter</strong></td>
+<td>用 <strong>tiktoken</strong> 等按 <strong>token</strong> 切，适合和 OpenAI 等模型的上下文上限对齐。</td>
+</tr>
+<tr>
+<td><strong>SentenceTransformersTokenTextSplitter</strong></td>
+<td>按 <strong>Sentence-Transformers</strong> 所用模型的 tokenizer 切，和该类 embedding 长度一致。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="3-按文档结构（标题、标记）"><a href="#3-按文档结构（标题、标记）" class="headerlink" title="3. 按文档结构（标题、标记）"></a><strong>3. 按文档结构（标题、标记）</strong></h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用简述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MarkdownHeaderTextSplitter</strong></td>
+<td>按 Markdown <strong>标题层级</strong>（#、##…）切块，块里可带上标题路径作上下文。</td>
+</tr>
+<tr>
+<td><strong>HTMLHeaderTextSplitter</strong></td>
+<td>按 HTML <strong>标题标签</strong>（如 h1–h6）切。</td>
+</tr>
+<tr>
+<td><strong>LatexTextSplitter</strong></td>
+<td>面向 LaTeX 结构的切分。</td>
+</tr>
+</tbody></table>
+<p>常与 <strong>RecursiveCharacterTextSplitter</strong> 组合：先结构切块，再控制每块最大长度。</p>
+<hr>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4. 代码"></a><strong>4. 代码</strong></h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用简述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Language</strong> &#x2F; <strong>RecursiveCharacterTextSplitter</strong> 的 language 参数</td>
+<td>对 <strong>Python、JS、Go</strong> 等用适合该语言的 separators（函数、类等边界）。</td>
+</tr>
+<tr>
+<td>（社区还有）<strong>CodeTextSplitter</strong> 等变体，按语言选分隔策略。</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-结构化数据"><a href="#5-结构化数据" class="headerlink" title="5. 结构化数据"></a><strong>5. 结构化数据</strong></h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用简述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RecursiveJsonSplitter</strong> &#x2F; <strong>JSON 相关 splitter</strong></td>
+<td>把 <strong>JSON</strong> 按层级拆成多个小 Document，避免整坨 JSON 当一块。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="6-语义切分（边界更「懂内容」）"><a href="#6-语义切分（边界更「懂内容」）" class="headerlink" title="6. 语义切分（边界更「懂内容」）"></a><strong>6. 语义切分（边界更「懂内容」）</strong></h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用简述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SemanticChunker</strong>（等在 experimental 或文档中单独说明）</td>
+<td>用 <strong>embedding 相似度</strong> 找「语义转折」再切，块更连贯，但成本高、速度慢。</td>
+</tr>
+</tbody></table>
+<p>具体类名和导入路径以当前安装的 <strong>langchain-text-splitters 版本文档</strong>为准。</p>
+<hr>
+<h2 id="7-传统-NLP-分句-分词"><a href="#7-传统-NLP-分句-分词" class="headerlink" title="7. 传统 NLP 分句 &#x2F; 分词"></a><strong>7. 传统 NLP 分句 &#x2F; 分词</strong></h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用简述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>NLTKTextSplitter</strong></td>
+<td>依赖 <strong>NLTK</strong> 做句子级切分。</td>
+</tr>
+<tr>
+<td><strong>SpacyTextSplitter</strong></td>
+<td>依赖 <strong>spaCy</strong>。</td>
+</tr>
+<tr>
+<td>其他语言可能有专门 splitter（如韩文等）。</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>需要额外装 NLTK&#x2F;spaCy 模型，部署要算依赖成本。</p>
+<hr>
+<h2 id="选型一句话"><a href="#选型一句话" class="headerlink" title="选型一句话"></a><strong>选型一句话</strong></h2><ul>
+<li><p><strong>通用 RAG 网页&#x2F;纯文本</strong>：<strong>RecursiveCharacterTextSplitter</strong>。</p>
 </li>
-<li><p>调整 <strong>chunk_size &#x2F; overlap &#x2F; 分隔符 &#x2F; 是否按标题切</strong>，对比命中率再定。 —<strong>一句话：</strong> 想更精确，优先 按标题&#x2F;段落结构切 + 合理 overlap + 丰富 metadata（必要时父文档），其次才是微调 chunk_size；<strong>干净正文</strong>比盲目切更碎更重要。**</p>
+<li><p><strong>要严格卡 token</strong>：<strong>TokenTextSplitter</strong> 或与 embedding 配套的 token splitter。</p>
+</li>
+<li><p><strong>Markdown&#x2F;HTML 文档</strong>：<strong>HeaderTextSplitter</strong> + 递归二次切。</p>
+</li>
+<li><p><strong>JSON API 结果</strong>：<strong>RecursiveJsonSplitter</strong> 一类。</p>
+</li>
+<li><p><strong>追求语义块且能接受算力</strong>：<strong>SemanticChunker</strong>。</p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1fdmsl000nm3lucpfbfnr0" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1fqwrp000nf4lu8x8j2c9k" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -240,11 +356,11 @@
           </li>
         
           <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
           </li>
         
           <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
           </li>
         
           <li>
