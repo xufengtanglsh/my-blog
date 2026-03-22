@@ -6,15 +6,15 @@
   
   <title>langChain基础 | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码    loader &#x3D; WebBaseLoader(url) docs &#x3D;">
+  <meta name="description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码 loader &#x3D; WebBaseLoader(url) docs &#x3D; loader.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="langChain基础">
 <meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/index.html">
 <meta property="og:site_name" content="johouブログ">
-<meta property="og:description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码    loader &#x3D; WebBaseLoader(url) docs &#x3D;">
+<meta property="og:description" content="①在venv环境中安装langchain    pip install langchain    pip install langchain-community    pip install langchain-text-splitters    pip install beautifulsoup4  ②切片代码 loader &#x3D; WebBaseLoader(url) docs &#x3D; loader.">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2026-03-22T06:04:25.000Z">
-<meta property="article:modified_time" content="2026-03-22T06:40:28.788Z">
+<meta property="article:modified_time" content="2026-03-22T06:41:40.525Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -100,9 +100,9 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>①在venv环境中安装langchain<br>    pip install langchain<br>    pip install langchain-community<br>    pip install langchain-text-splitters<br>    pip install beautifulsoup4</p>
-<p> ②切片代码<br>    loader &#x3D; WebBaseLoader(url)</p>
-<pre><code>docs = loader.load()
-
+<p> ②切片代码</p>
+<pre><code>loader = WebBaseLoader(url)
+docs = loader.load()
 
 text_splitter =  RecursiveCharacterTextSplitter(
 
@@ -120,7 +120,7 @@ for i, chunk in enumerate(chunks):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1e118h000l6bluatt433pm" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1e2nxb000kz6luboyd2mv9" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -186,11 +186,11 @@ for i, chunk in enumerate(chunks):
           </li>
         
           <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
           </li>
         
           <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
           </li>
         
           <li>
