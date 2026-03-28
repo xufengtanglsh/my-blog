@@ -101,11 +101,18 @@
 <p>②调用BAAI&#x2F;bge-m3模型，生成embedding</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from sentence_transformers import SentenceTransformer</span><br><span class="line">#声明模型</span><br><span class="line">model = SentenceTransformer(&quot;BAAI/bge-m3&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for i, chunk in enumerate(chunks):</span><br><span class="line">    embeddings = encode_text(chunk.page_content, model)</span><br><span class="line">    print(f&quot;Embedding &#123;i&#125;:&quot;)</span><br><span class="line">    print(embeddings)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def encode_text(text: str, model: SentenceTransformer):</span><br><span class="line">    #调用模型</span><br><span class="line">    embeddings = model.encode(text, normalize_embeddings=True).tolist()</span><br><span class="line">    return embeddings</span><br></pre></td></tr></table></figure>
 
+<p>③安装chromadb<br>python3 -m pip install chromadb</p>
+<p>④存入chromadb</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import chromadb</span><br><span class="line"></span><br><span class="line">client = chromadb.PersistentClient(path=&quot;rag_chroma_db&quot;)</span><br><span class="line">try:</span><br><span class="line"></span><br><span class="line">  client.delete_collection(name=&quot;rag_collection&quot;)</span><br><span class="line">except Exception as e:</span><br><span class="line">  print(e)</span><br><span class="line">  pass     </span><br><span class="line">collection = client.get_or_create_collection(name=&quot;rag_collection&quot;,metadata=&#123;&quot;hnsw:space&quot;: &quot;cosine&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>get_or_create_collection函数的参数说明：</p>
+<p>name：<br>集合（collection）的名字，字符串，你自己定，相当于 「这张向量表 &#x2F; 这个库」的标识。<br>同一 client 里 名字唯一：没有就 创建，已有就 取出来用（get_or_create）。<br>后面 collection.add &#x2F; query 都是往这个集合里读写。</p>
+<p>metadata:<br>这是 建集合时带的元数据，用来影响 向量索引怎么算「远近」。<br>Chroma 默认用 HNSW 做近似最近邻检索。<br>hnsw:space 表示 距离&#x2F;相似度空间：<br>“cosine”：按 余弦距离（与 余弦相似度 对应；向量已 单位化 时，和用内积排序常一致）。<br>还有常见取值如 “l2”（欧氏距离）、”ip”（内积 &#x2F; inner product）。<br>为什么写 cosine：<br>你对 embedding 做了 normalize_embeddings&#x3D;True 时，向量在单位球面上，用 cosine 很常见，语义是「方向有多接近」。<br>注意：<br>这类 metadata 一般要在集合「第一次创建」时定好；已有集合再改可能受限或需建新集合，以 Chroma 版本文档为准。<br>若没传，会用 默认距离（不同版本默认可能是 L2，以文档为准）。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmna7r657000nhrlua53r8hb5" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnacdysh000pqblud6l07ypy" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -334,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmna7r657000khrlu35xt6rng" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnacdysg000nqblu3swr2xa9" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -379,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmna7r658000shrlu9o31hj9d" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnacdysg000kqblubbytffni" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -430,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmna7r657000phrlud3p154dr" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnacdysh000sqbluel9oezzf" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -489,7 +496,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmna7r65a0019hrlu6wfo8ey9" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnacdysh000uqblu5qa9ehjd" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -533,7 +540,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmna7r655000bhrlufjsfdc1k" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnacdysf000bqblua9147wzs" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -581,7 +588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmna7r6530008hrlucrwk3eny" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnacdysd0008qblu46q9alqo" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -638,7 +645,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmna7r6530007hrlufhd7e001" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnacdysd0007qbludkaz19om" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -703,7 +710,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmna7r6530005hrlu79axh5lb" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmnacdysd0005qblub0qk50p5" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -761,7 +768,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmna7r6520004hrlu2xo349za" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmnacdysc0004qblu6jkg2au2" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
