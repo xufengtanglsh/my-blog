@@ -71,6 +71,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RAG/ragStudy4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/03/28/RAG/ragStudy4/" class="article-date">
+  <time class="dt-published" datetime="2026-03-28T13:06:11.000Z" itemprop="datePublished">2026-03-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-RAG/">技術(RAG)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/03/28/RAG/ragStudy4/">langChain基础-召回</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①用户问题embedding并召回</p>
+<pre><code>model = SentenceTransformer(&quot;BAAI/bge-m3&quot;)
+client = chromadb.PersistentClient(path=&quot;rag_chroma_db&quot;)
+collection = client.get_or_create_collection(name=&quot;rag_collection&quot;,metadata=&#123;&quot;hnsw:space&quot;: &quot;cosine&quot;&#125;)
+print(collection.count())
+answer_docs = collection.query(
+    query_texts=[question],
+    query_embeddings=encode_text(question, model),
+    n_results=5,
+)
+
+for i, doc in enumerate(answer_docs[&quot;documents&quot;][0]):
+    print(f&quot;Document &#123;i&#125;:&quot;)
+    print(doc)
+
+def encode_text(text: str, model: SentenceTransformer):
+    embeddings = model.encode(text, normalize_embeddings=True)
+    return embeddings
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnaclo5n000q2klu46oshkg6" data-title="langChain基础-召回" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-RAG/ragStudy3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2026/03/28/RAG/ragStudy3/" class="article-date">
@@ -112,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnacdysh000pqblud6l07ypy" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnaclo5m000l2kluefihepl4" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -341,7 +402,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnacdysg000nqblu3swr2xa9" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnaclo5m000o2kludx2ed0ia" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -386,7 +447,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnacdysg000kqblubbytffni" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnaclo5m000j2klu6lrla28s" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -437,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnacdysh000sqbluel9oezzf" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnaclo5n000t2klu0ba49lqe" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -496,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnacdysh000uqblu5qa9ehjd" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnaclo5n000v2klu7182figd" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -540,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnacdysf000bqblua9147wzs" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnaclo5j00072klu7ijyhm0b" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -588,7 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnacdysd0008qblu46q9alqo" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnaclo5j00082klubwt80ey2" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -645,7 +706,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnacdysd0007qbludkaz19om" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnaclo5j00052klu3sa3e9ze" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -710,65 +771,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmnacdysd0005qblub0qk50p5" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-fastAPI1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2026/02/23/fastAPI1/" class="article-date">
-  <time class="dt-published" datetime="2026-02-23T07:19:10.000Z" itemprop="datePublished">2026-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2026/02/23/fastAPI1/">fastAPI基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>检查python环境<br>    python3 –version<br>创建虚拟环境<br>    python3 -m venv venv<br>激活环境<br>    source venv&#x2F;bin&#x2F;activate<br>激活环境中安装fastAPI<br>    pip install fastapi uvicorn<br>激活环境中安装ORM<br>    pip install sqlalchemy<br>工程下创建文件<br>    main.py创建到venv虚拟环境目录以外</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">@app.get(&quot;/&quot;)</span><br><span class="line">def root():</span><br><span class="line">    return &#123;&quot;message&quot;: &quot;Hello FastAPI&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>启动服务<br>uvicorn main:app —-reload</p>
-<p>访问<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">http://127.0.0.1:8000</a><br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a></p>
-<p>停止服务<br>control + C</p>
-<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;router写法&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>project&#x2F;<br> ├── main.py<br> ├── routers&#x2F;<br> │     ├── student.py<br> │     └── user.py</p>
-<p>student.py</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import APIRouter</span><br><span class="line">router = APIRouter()</span><br><span class="line"></span><br><span class="line">@router.get(&quot;/students&quot;)</span><br><span class="line">def get_students():</span><br><span class="line">    return &#123;&quot;msg&quot;: &quot;students&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>user.py</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import APIRouter</span><br><span class="line">router = APIRouter()</span><br><span class="line"></span><br><span class="line">@router.get(&quot;/users&quot;)</span><br><span class="line">def get_users():</span><br><span class="line">    return &#123;&quot;msg&quot;: &quot;users&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>main.py</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line">from routers import student</span><br><span class="line">from routers import user</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line">app.include_router(student.router)</span><br><span class="line">app.include_router(user.router)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmnacdysc0004qblu6jkg2au2" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmnaclo5n000y2klu1arm6c85" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -823,6 +826,10 @@ def create_student(student: Student):
       <ul>
         
           <li>
+            <a href="/my-blog/2026/03/28/RAG/ragStudy4/">langChain基础-召回</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2026/03/28/RAG/ragStudy3/">langChain基础-embedding</a>
           </li>
         
@@ -836,10 +843,6 @@ def create_student(student: Student):
         
           <li>
             <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
           </li>
         
       </ul>

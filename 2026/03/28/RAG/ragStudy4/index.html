@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>高级SQL文① | johouブログ</title>
+  <title>langChain基础-召回 | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="①ROW_NUMBER() OVER– 为所有员工按薪资排序并分配序号SELECT    employee_name,    salary,    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_numFROM employees;    employee_name salary row_num    张三 80000 1   李四 75000 2">
+  <meta name="description" content="①用户问题embedding并召回 model &#x3D; SentenceTransformer(&quot;BAAI&#x2F;bge-m3&quot;) client &#x3D; chromadb.PersistentClient(path&#x3D;&quot;rag_chroma_db&quot;) collection &#x3D; client.get_or_create_collection(name&#x3D;&quot;rag_co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高级SQL文①">
-<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/index.html">
+<meta property="og:title" content="langChain基础-召回">
+<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/index.html">
 <meta property="og:site_name" content="johouブログ">
-<meta property="og:description" content="①ROW_NUMBER() OVER– 为所有员工按薪资排序并分配序号SELECT    employee_name,    salary,    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_numFROM employees;    employee_name salary row_num    张三 80000 1   李四 75000 2">
+<meta property="og:description" content="①用户问题embedding并召回 model &#x3D; SentenceTransformer(&quot;BAAI&#x2F;bge-m3&quot;) client &#x3D; chromadb.PersistentClient(path&#x3D;&quot;rag_chroma_db&quot;) collection &#x3D; client.get_or_create_collection(name&#x3D;&quot;rag_co">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2025-07-05T12:32:44.000Z">
-<meta property="article:modified_time" content="2025-07-05T13:00:19.292Z">
+<meta property="article:published_time" content="2026-03-28T13:06:11.000Z">
+<meta property="article:modified_time" content="2026-03-28T13:10:04.525Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -73,14 +73,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-dataBase2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-RAG/ragStudy4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/my-blog/2025/07/05/dataBase2/" class="article-date">
-  <time class="dt-published" datetime="2025-07-05T12:32:44.000Z" itemprop="datePublished">2025-07-05</time>
+    <a href="/my-blog/2026/03/28/RAG/ragStudy4/" class="article-date">
+  <time class="dt-published" datetime="2026-03-28T13:06:11.000Z" itemprop="datePublished">2026-03-28</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-dataBase/">技術(dataBase)</a>
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-RAG/">技術(RAG)</a>
   </div>
 
   </div>
@@ -91,7 +91,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      高级SQL文①
+      langChain基础-召回
     </h1>
   
 
@@ -99,132 +99,30 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>①ROW_NUMBER() OVER<br>– 为所有员工按薪资排序并分配序号<br>SELECT<br>    employee_name,<br>    salary,<br>    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_num<br>FROM employees;</p>
-<table>
-<thead>
-<tr>
-<th>employee_name</th>
-<th>salary</th>
-<th>row_num</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>张三</td>
-<td>80000</td>
-<td>1</td>
-</tr>
-<tr>
-<td>李四</td>
-<td>75000</td>
-<td>2</td>
-</tr>
-<tr>
-<td>王五</td>
-<td>70000</td>
-<td>3</td>
-</tr>
-<tr>
-<td>赵六</td>
-<td>65000</td>
-<td>4</td>
-</tr>
-</tbody></table>
-<p>– 按部门分组，每个部门内按薪资排序<br>SELECT<br>    employee_name,<br>    department,<br>    salary,<br>    ROW_NUMBER() OVER (<br>        PARTITION BY department<br>        ORDER BY salary DESC<br>    ) as dept_rank<br>FROM employees;</p>
-<table>
-<thead>
-<tr>
-<th>employee_name</th>
-<th>department</th>
-<th>salary</th>
-<th>dept_rank</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>张三</td>
-<td>技术部</td>
-<td>80000</td>
-<td>1</td>
-</tr>
-<tr>
-<td>李四</td>
-<td>技术部</td>
-<td>75000</td>
-<td>2</td>
-</tr>
-<tr>
-<td>王五</td>
-<td>销售部</td>
-<td>70000</td>
-<td>1</td>
-</tr>
-<tr>
-<td>赵六</td>
-<td>销售部</td>
-<td>65000</td>
-<td>2</td>
-</tr>
-</tbody></table>
-<p>②RANK() OVER<br>　ROW_NUMBER() OVER类似， 只是他排名可以相同，相同的值分配相同的排名</p>
-<p>③DENSE_RANK() OVER<br>  RANK() OVER类似， 相同的值分配相同的排名,并且不会跳番</p>
-<p>总结：<br>– 比较ROW_NUMBER、RANK、DENSE_RANK<br>SELECT<br>    employee_name,<br>    salary,<br>    ROW_NUMBER() OVER (ORDER BY salary DESC) as row_num,<br>    RANK() OVER (ORDER BY salary DESC) as rank_num,<br>    DENSE_RANK() OVER (ORDER BY salary DESC) as dense_rank<br>FROM employees;</p>
-<table>
-<thead>
-<tr>
-<th>employee_name</th>
-<th>salary</th>
-<th>row_num</th>
-<th>rank_num</th>
-<th>dense_rank</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>张三</td>
-<td>80000</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>李四</td>
-<td>80000</td>
-<td>2</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>王五</td>
-<td>75000</td>
-<td>3</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>赵六</td>
-<td>70000</td>
-<td>4</td>
-<td>4</td>
-<td>3</td>
-</tr>
-<tr>
-<td>钱七</td>
-<td>70000</td>
-<td>5</td>
-<td>4</td>
-<td>3</td>
-</tr>
-<tr>
-<td>孙八</td>
-<td>65000</td>
-<td>6</td>
-<td>6</td>
-<td>4</td>
-</tr>
-</tbody></table>
+        <p>①用户问题embedding并召回</p>
+<pre><code>model = SentenceTransformer(&quot;BAAI/bge-m3&quot;)
+client = chromadb.PersistentClient(path=&quot;rag_chroma_db&quot;)
+collection = client.get_or_create_collection(name=&quot;rag_collection&quot;,metadata=&#123;&quot;hnsw:space&quot;: &quot;cosine&quot;&#125;)
+print(collection.count())
+answer_docs = collection.query(
+    query_texts=[question],
+    query_embeddings=encode_text(question, model),
+    n_results=5,
+)
+
+for i, doc in enumerate(answer_docs[&quot;documents&quot;][0]):
+    print(f&quot;Document &#123;i&#125;:&quot;)
+    print(doc)
+
+def encode_text(text: str, model: SentenceTransformer):
+    embeddings = model.encode(text, normalize_embeddings=True)
+    return embeddings
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2025/07/05/dataBase2/" data-id="cmnaclo5i00042klu63ri06eo" data-title="高级SQL文①" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnaclo5n000q2klu46oshkg6" data-title="langChain基础-召回" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -234,19 +132,10 @@
     
 <nav id="article-nav">
   
-    <a href="/my-blog/2026/02/23/pythonStudy2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          python文法
-        
-      </div>
-    </a>
   
-  
-    <a href="/my-blog/2025/06/29/javaTread1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/my-blog/2026/03/28/RAG/ragStudy3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Java线程基础（创建、生命周期、状态）</div>
+      <div class="article-nav-title">langChain基础-embedding</div>
     </a>
   
 </nav>
