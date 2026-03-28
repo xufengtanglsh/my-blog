@@ -288,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn1fqwrp000nf4lu8x8j2c9k" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn9wrtoe000j40lu6tbg7uae" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -328,12 +328,63 @@
       
         <p>步骤<br>  分片→索引→召回→重排→生成</p>
 <p>①分片</p>
-<p>②索引<br>    sentence_transformer embedding<br>    chromadb<br>③重排<br>    sentence_transformer cross-encoder<br>④生成<br>    google-genai<br>    python-dotenv</p>
+<p>②索引<br>    sentence_transformer embedding<br>    chromadb<br>    ※embedding模型选取，推荐学习的话bge-base（最佳选择）但是不支持日文训练<br>    企业级 RAG的话BGE-M3比较合适<br>③重排<br>    sentence_transformer cross-encoder<br>④生成<br>    google-genai<br>    python-dotenv</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmn1fqwro000kf4luactv9v4b" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmn9wrtoe000g40ludqm3hye4" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-VUE3/vueStudy1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/03/08/VUE3/vueStudy1/" class="article-date">
+  <time class="dt-published" datetime="2026-03-08T08:25:11.000Z" itemprop="datePublished">2026-03-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-VUE3/">技術(VUE3)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①環境前提<br>    node.js安装  node -v命令查看<br>    npm安装    npm -v命令查看</p>
+<p>②创建 Vue3 项目<br>    npm create vue@latest</p>
+<p>③安装依赖<br>    npm install</p>
+<p>④启动项目<br>    npm run dev<br>    <a href="http://localhost:5173访问这个首页">http://localhost:5173访问这个首页</a></p>
+<p>⑤vue调用流程<br>浏览器请求页面<br>    ↓</p>
+<p>加载 index.html<br>    ↓</p>
+<p>解析 HTML，DOM 中出现 div id&#x3D;”app”<br>    ↓</p>
+<p>遇到 script src&#x3D;”&#x2F;src&#x2F;main.ts” 加载并执行 main.ts<br>    ↓</p>
+<p>main.ts：createApp → use(Pinia) → use(router) → mount(‘#app’)<br>    ↓<br>Vue 应用挂载到app</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmn9wrtoe000l40lu7b1beu1b" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -392,58 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmn1fqwrp000pf4lu9lxt2df2" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-VUE3/vueStudy1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2026/03/08/VUE3/vueStudy1/" class="article-date">
-  <time class="dt-published" datetime="2026-03-08T08:25:11.000Z" itemprop="datePublished">2026-03-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-VUE3/">技術(VUE3)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>①環境前提<br>    node.js安装  node -v命令查看<br>    npm安装    npm -v命令查看</p>
-<p>②创建 Vue3 项目<br>    npm create vue@latest</p>
-<p>③安装依赖<br>    npm install</p>
-<p>④启动项目<br>    npm run dev<br>    <a href="http://localhost:5173访问这个首页">http://localhost:5173访问这个首页</a></p>
-<p>⑤vue调用流程<br>浏览器请求页面<br>    ↓</p>
-<p>加载 index.html<br>    ↓</p>
-<p>解析 HTML，DOM 中出现 div id&#x3D;”app”<br>    ↓</p>
-<p>遇到 script src&#x3D;”&#x2F;src&#x2F;main.ts” 加载并执行 main.ts<br>    ↓</p>
-<p>main.ts：createApp → use(Pinia) → use(router) → mount(‘#app’)<br>    ↓<br>Vue 应用挂载到app</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmn1fqwrp000sf4lufifr4alx" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmn9wrtof000o40luc5dqat43" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -487,7 +487,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmn1fqwrn000bf4luhxbkco2h" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmn9wrtob000840lu1i9pbeom" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -535,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmn1fqwrm0008f4lu1e4u4bh0" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmn9wrtob000740lueyte0s8c" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -592,7 +592,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmn1fqwrm0007f4luew6r97u1" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmn9wrtob000540ludjjk0i1o" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -657,7 +657,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmn1fqwrl0005f4luaqyn88i8" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmn9wrtoa000440luert4dchi" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -715,7 +715,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmn1fqwrl0004f4lu9hhs4cry" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmn9wrtoa000340lu8d3r164y" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -765,7 +765,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmn1fqwro000gf4lu9yyx2jtp" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmn9wrtof000t40lu0oru7yir" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -828,11 +828,11 @@ def create_student(student: Student):
           </li>
         
           <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
           </li>
         
           <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
+            <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
           </li>
         
           <li>
