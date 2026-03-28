@@ -71,6 +71,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RAG/ragStudy3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/03/28/RAG/ragStudy3/" class="article-date">
+  <time class="dt-published" datetime="2026-03-28T06:03:20.000Z" itemprop="datePublished">2026-03-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-RAG/">技術(RAG)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/03/28/RAG/ragStudy3/">langChain基础-embedding</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①安装sentence-transformers<br>    pip install sentence-transformers<br>    误区：即使使用langChain接口调用embedding模型，也必须安装sentence-transformers<br>         因为langChain接口只是对sentence-transformers进行了封装，底层还是需要</p>
+<p>②调用BAAI&#x2F;bge-m3模型，生成embedding</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from sentence_transformers import SentenceTransformer</span><br><span class="line">#声明模型</span><br><span class="line">model = SentenceTransformer(&quot;BAAI/bge-m3&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for i, chunk in enumerate(chunks):</span><br><span class="line">    embeddings = encode_text(chunk.page_content, model)</span><br><span class="line">    print(f&quot;Embedding &#123;i&#125;:&quot;)</span><br><span class="line">    print(embeddings)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def encode_text(text: str, model: SentenceTransformer):</span><br><span class="line">    #调用模型</span><br><span class="line">    embeddings = model.encode(text, normalize_embeddings=True).tolist()</span><br><span class="line">    return embeddings</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmna7r657000nhrlua53r8hb5" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-RAG/ragStudy2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2026/03/22/RAG/ragStudy2/" class="article-date">
@@ -89,7 +135,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2026/03/22/RAG/ragStudy2/">langChain基础</a>
+      <a class="p-name article-title" href="/my-blog/2026/03/22/RAG/ragStudy2/">langChain基础-分片</a>
     </h1>
   
 
@@ -288,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmn9wrtoe000j40lu6tbg7uae" data-title="langChain基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmna7r657000khrlu35xt6rng" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -328,12 +374,12 @@
       
         <p>步骤<br>  分片→索引→召回→重排→生成</p>
 <p>①分片</p>
-<p>②索引<br>    sentence_transformer embedding<br>    chromadb<br>    ※embedding模型选取，推荐学习的话bge-base（最佳选择）但是不支持日文训练<br>    企业级 RAG的话BGE-M3比较合适<br>③重排<br>    sentence_transformer cross-encoder<br>④生成<br>    google-genai<br>    python-dotenv</p>
+<p>②索引<br>    sentence_transformer embedding<br>    chromadb<br>    ※embedding模型选取，推荐学习的话bge-base（最佳选择）但是不支持日文训练<br>    企业级 RAG的话BGE-M3比较合适<br>    官方推荐使用FlagEmbedding调用BGE-M3模型<br>③重排<br>    sentence_transformer cross-encoder<br>④生成<br>    google-genai<br>    python-dotenv</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmn9wrtoe000g40ludqm3hye4" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmna7r658000shrlu9o31hj9d" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -384,7 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmn9wrtoe000l40lu7b1beu1b" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmna7r657000phrlud3p154dr" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -443,7 +489,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmn9wrtof000o40luc5dqat43" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmna7r65a0019hrlu6wfo8ey9" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -487,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmn9wrtob000840lu1i9pbeom" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmna7r655000bhrlufjsfdc1k" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -535,7 +581,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmn9wrtob000740lueyte0s8c" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmna7r6530008hrlucrwk3eny" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -592,7 +638,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmn9wrtob000540ludjjk0i1o" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmna7r6530007hrlufhd7e001" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -657,7 +703,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmn9wrtoa000440luert4dchi" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmna7r6530005hrlu79axh5lb" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -715,57 +761,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmn9wrtoa000340lu8d3r164y" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-pythonStudy3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2026/02/23/pythonStudy3/" class="article-date">
-  <time class="dt-published" datetime="2026-02-23T06:39:40.000Z" itemprop="datePublished">2026-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2026/02/23/pythonStudy3/">python类声明</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>class Shape:<br>    def area(self):<br>        raise NotImplementedError(“必须实现area方法”)</p>
-<p>class Rectangle(Shape):<br>    def <strong>init</strong>(self, width, height):<br>        self.width &#x3D; width<br>        self.height &#x3D; height</p>
-<p>def area(self):<br>    return self.width * self.height</p>
-<p>class Circle(Shape):<br>    def <strong>init</strong>(self, radius):<br>        self.radius &#x3D; radius</p>
-<p>def area(self):<br>    return 3.14 * self.radius * self.radius</p>
-<p>def print_area(shape):<br>    print(shape.area())</p>
-<p>r &#x3D; Rectangle(4, 5)<br>c &#x3D; Circle(3)</p>
-<p>print_area(r)<br>print_area(c)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/pythonStudy3/" data-id="cmn9wrtof000t40lu0oru7yir" data-title="python类声明" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI1/" data-id="cmna7r6520004hrlu2xo349za" data-title="fastAPI基础" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -820,7 +816,11 @@ def create_student(student: Student):
       <ul>
         
           <li>
-            <a href="/my-blog/2026/03/22/RAG/ragStudy2/">langChain基础</a>
+            <a href="/my-blog/2026/03/28/RAG/ragStudy3/">langChain基础-embedding</a>
+          </li>
+        
+          <li>
+            <a href="/my-blog/2026/03/22/RAG/ragStudy2/">langChain基础-分片</a>
           </li>
         
           <li>
@@ -833,10 +833,6 @@ def create_student(student: Student):
         
           <li>
             <a href="/my-blog/2026/03/08/VUE3/vueStudy2/">VUE入门Samle和elemetPlus应用</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2026/03/01/fastAPI5/">fastAPI cookie和header取得</a>
           </li>
         
       </ul>
