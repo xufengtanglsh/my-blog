@@ -129,7 +129,7 @@ def generate_answer(question: str, answer_docs: list, client: genai.Client)-&gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/29/RAG/ragStudy5/" data-id="cmnbh7zyt000usmlufw7mejts" data-title="langChain基础-LLM调用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/29/RAG/ragStudy5/" data-id="cmnbhjucq000uo6lufrlafi1k" data-title="langChain基础-LLM调用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -168,44 +168,16 @@ def generate_answer(question: str, answer_docs: list, client: genai.Client)-&gt;
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>①用户问题embedding并召回</p>
-<pre><code>model = SentenceTransformer(&quot;BAAI/bge-m3&quot;)
-client = chromadb.PersistentClient(path=&quot;rag_chroma_db&quot;)
-collection = client.get_or_create_collection(name=&quot;rag_collection&quot;,metadata=&#123;&quot;hnsw:space&quot;: &quot;cosine&quot;&#125;)
-print(collection.count())
-answer_docs = collection.query(
-    query_texts=[question],
-    query_embeddings=encode_text(question, model),
-    n_results=5,
-)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">代码：</span><br><span class="line">from sentence_transformers import SentenceTransformer</span><br><span class="line"></span><br><span class="line">model = SentenceTransformer(&quot;BAAI/bge-m3&quot;)</span><br><span class="line"></span><br><span class="line">client = chromadb.PersistentClient(path=&quot;rag_chroma_db&quot;)</span><br><span class="line">collection = client.get_or_create_collection(name=&quot;rag_collection&quot;,metadata=&#123;&quot;hnsw:space&quot;: &quot;cosine&quot;&#125;)</span><br><span class="line">print(collection.count())</span><br><span class="line">answer_docs = collection.query(</span><br><span class="line">    query_texts=[question],</span><br><span class="line">    query_embeddings=encode_text(question, model),</span><br><span class="line">    n_results=5,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">for i, doc in enumerate(answer_docs[&quot;documents&quot;][0]):</span><br><span class="line">    print(f&quot;Document &#123;i&#125;:&quot;)</span><br><span class="line">    print(doc)</span><br><span class="line"></span><br><span class="line">def encode_text(text: str, model: SentenceTransformer):</span><br><span class="line">    embeddings = model.encode(text, normalize_embeddings=True)</span><br><span class="line">    return embeddings</span><br></pre></td></tr></table></figure>
 
-for i, doc in enumerate(answer_docs[&quot;documents&quot;][0]):
-    print(f&quot;Document &#123;i&#125;:&quot;)
-    print(doc)
-
-def encode_text(text: str, model: SentenceTransformer):
-    embeddings = model.encode(text, normalize_embeddings=True)
-    return embeddings
-</code></pre>
 <p>②使用cross-encoder重排<br>    模型有如下：<br>    类型	示例模型 ID	说明<br>    英文检索 &#x2F; 重排	cross-encoder&#x2F;ms-marco-MiniLM-L-6-v2	小、快<br>    英文检索 &#x2F; 重排	cross-encoder&#x2F;ms-marco-MiniLM-L-12-v2	略强、略慢<br>    英文	cross-encoder&#x2F;ms-marco-electra-base	更大、更准、更慢<br>    多语言	cross-encoder&#x2F;mmarco-mMiniLMv2-L12-H384-v1	mMARCO，多语 rerank<br>    通用句对分类	cross-encoder&#x2F;stsb-roberta-base	STS 等，不一定是「段落检索」最优<br>    NLI	cross-encoder&#x2F;nli-roberta-base</p>
-<pre><code>代码：
-from sentence_transformers import CrossEncoder
-crossModel = CrossEncoder(&quot;cross-encoder/mmarco-mMiniLMv2-L12-H384-v1&quot;)
-reranked_docs = rerank_answer(question, answer_docs[&quot;documents&quot;][0], 2, crossModel)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">代码：</span><br><span class="line">from sentence_transformers import CrossEncoder</span><br><span class="line"></span><br><span class="line">crossModel = CrossEncoder(&quot;cross-encoder/mmarco-mMiniLMv2-L12-H384-v1&quot;)</span><br><span class="line">reranked_docs = rerank_answer(question, answer_docs[&quot;documents&quot;][0], 2, crossModel)</span><br><span class="line"></span><br><span class="line">def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEncoder):</span><br><span class="line">    pairs = [(question, doc) for doc in answer_docs]</span><br><span class="line">    scores = model.predict(pairs)</span><br><span class="line">    scores_List = [(doc,score) for doc, score in zip(answer_docs, scores)]</span><br><span class="line">    scores_List.sort(key=lambda pair: pair[1], reverse=True)</span><br><span class="line">    reranked_docs = [doc for doc, _ in scores_List[:top_k]]</span><br><span class="line"></span><br><span class="line">    return reranked_docs</span><br></pre></td></tr></table></figure>
 
-def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEncoder):
-    pairs = [(question, doc) for doc in answer_docs]
-    scores = model.predict(pairs)
-    scores_List = [(doc,score) for doc, score in zip(answer_docs, scores)]
-    scores_List.sort(key=lambda pair: pair[1], reverse=True)
-    reranked_docs = [doc for doc, _ in scores_List[:top_k]]
-
-    return reranked_docs
-</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnbh7zyt000ssmlu4e1m4hs6" data-title="langChain基础-召回重排" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnbhjucp000so6lu4k4h8xlk" data-title="langChain基础-召回重排" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -258,7 +230,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnbh7zys000nsmlu36q19uzz" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnbhjucp000po6lu145k4eny" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -487,7 +459,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnbh7zys000psmluhgxu58ld" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnbhjucp000no6luejizf3ki" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -532,7 +504,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnbh7zyr000jsmlu6n7y0hec" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnbhjucp000ko6lu454z1k0j" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -583,7 +555,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnbh7zyt000xsmlug83tc98i" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnbhjucq000xo6lu6so4c7ep" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -642,7 +614,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnbh7zyt000zsmlu1pdibeko" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnbhjucq000zo6lug21pg22c" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -686,7 +658,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnbh7zyp0008smluc55kd10q" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnbhjucn000bo6lu5una6r3k" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -734,7 +706,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnbh7zyq000bsmluc8o3gpce" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnbhjucn0008o6lu2k3nd4bi" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -791,7 +763,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnbh7zyp0007smlufg6l5d14" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnbhjucm0007o6lu2ujx9lea" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
