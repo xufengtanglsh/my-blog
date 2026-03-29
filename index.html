@@ -89,7 +89,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2026/03/28/RAG/ragStudy4/">langChain基础-召回</a>
+      <a class="p-name article-title" href="/my-blog/2026/03/28/RAG/ragStudy4/">langChain基础-召回重排</a>
     </h1>
   
 
@@ -116,11 +116,26 @@ def encode_text(text: str, model: SentenceTransformer):
     embeddings = model.encode(text, normalize_embeddings=True)
     return embeddings
 </code></pre>
+<p>②使用cross-encoder重排<br>    模型有如下：<br>    类型	示例模型 ID	说明<br>    英文检索 &#x2F; 重排	cross-encoder&#x2F;ms-marco-MiniLM-L-6-v2	小、快<br>    英文检索 &#x2F; 重排	cross-encoder&#x2F;ms-marco-MiniLM-L-12-v2	略强、略慢<br>    英文	cross-encoder&#x2F;ms-marco-electra-base	更大、更准、更慢<br>    多语言	cross-encoder&#x2F;mmarco-mMiniLMv2-L12-H384-v1	mMARCO，多语 rerank<br>    通用句对分类	cross-encoder&#x2F;stsb-roberta-base	STS 等，不一定是「段落检索」最优<br>    NLI	cross-encoder&#x2F;nli-roberta-base</p>
+<pre><code>代码：
+from sentence_transformers import CrossEncoder
+crossModel = CrossEncoder(&quot;cross-encoder/mmarco-mMiniLMv2-L12-H384-v1&quot;)
+reranked_docs = rerank_answer(question, answer_docs[&quot;documents&quot;][0], 2, crossModel)
+
+def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEncoder):
+    pairs = [(question, doc) for doc in answer_docs]
+    scores = model.predict(pairs)
+    scores_List = [(doc,score) for doc, score in zip(answer_docs, scores)]
+    scores_List.sort(key=lambda pair: pair[1], reverse=True)
+    reranked_docs = [doc for doc, _ in scores_List[:top_k]]
+
+    return reranked_docs
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnaclo5n000q2klu46oshkg6" data-title="langChain基础-召回" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnbf16qo000sqklu2r8zbpzq" data-title="langChain基础-召回重排" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -173,7 +188,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnaclo5m000l2kluefihepl4" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnbf16qo000pqklu915vcuo2" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -402,7 +417,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnaclo5m000o2kludx2ed0ia" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnbf16qo000nqkluanvr9z6e" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -447,7 +462,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnaclo5m000j2klu6lrla28s" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnbf16qo000kqkludwko9avh" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -498,7 +513,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnaclo5n000t2klu0ba49lqe" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnbf16qp000uqklugk3g88vl" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -557,7 +572,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnaclo5n000v2klu7182figd" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnbf16qp000xqkluaia4fi4h" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -601,7 +616,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnaclo5j00072klu7ijyhm0b" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnbf16qm000bqkludfh0a9df" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -649,7 +664,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnaclo5j00082klubwt80ey2" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnbf16ql0008qklugzor61gd" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -706,7 +721,7 @@ def encode_text(text: str, model: SentenceTransformer):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnaclo5j00052klu3sa3e9ze" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnbf16ql0007qklufwrchpb7" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -771,7 +786,7 @@ def create_student(student: Student):
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmnaclo5n000y2klu1arm6c85" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmnbf16qk0005qklu3s0l7qkr" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -826,7 +841,7 @@ def create_student(student: Student):
       <ul>
         
           <li>
-            <a href="/my-blog/2026/03/28/RAG/ragStudy4/">langChain基础-召回</a>
+            <a href="/my-blog/2026/03/28/RAG/ragStudy4/">langChain基础-召回重排</a>
           </li>
         
           <li>
