@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>fastAPI cookie和header取得 | johouブログ</title>
+  <title>langChain基础-LLM调用 | johouブログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="①Header取得    @app.get(“&#x2F;items”)    def read_items(        token: str &#x3D; Header(alias&#x3D;”X-Token”)    ):        return {“token”: token} ②cookie取得    @app.get(“&#x2F;cookies”)    def get_coo">
+  <meta name="description" content="①Gemini2.5 flash免费    https:&#x2F;&#x2F;aistudio.google.com&#x2F;app&#x2F;api-keys 注册APIKEY ②项目下创建.env文件    输入如下内容    GEMINI_API_KEY&#x3D;XXXXXXXX ③python为了能够读到.env文件中设置APIKEY    pip install python-dotenv 安装 ④调用LLM    pi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fastAPI cookie和header取得">
-<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/index.html">
+<meta property="og:title" content="langChain基础-LLM调用">
+<meta property="og:url" content="https://xufengtanglsh.github.io/my-blog/2026/03/29/RAG/ragStudy5/index.html">
 <meta property="og:site_name" content="johouブログ">
-<meta property="og:description" content="①Header取得    @app.get(“&#x2F;items”)    def read_items(        token: str &#x3D; Header(alias&#x3D;”X-Token”)    ):        return {“token”: token} ②cookie取得    @app.get(“&#x2F;cookies”)    def get_coo">
+<meta property="og:description" content="①Gemini2.5 flash免费    https:&#x2F;&#x2F;aistudio.google.com&#x2F;app&#x2F;api-keys 注册APIKEY ②项目下创建.env文件    输入如下内容    GEMINI_API_KEY&#x3D;XXXXXXXX ③python为了能够读到.env文件中设置APIKEY    pip install python-dotenv 安装 ④调用LLM    pi">
 <meta property="og:locale" content="ja_JP">
-<meta property="article:published_time" content="2026-03-01T12:25:33.000Z">
-<meta property="article:modified_time" content="2026-03-01T12:29:35.874Z">
+<meta property="article:published_time" content="2026-03-29T07:07:02.000Z">
+<meta property="article:modified_time" content="2026-03-29T08:07:16.190Z">
 <meta property="article:author" content="johou">
 <meta name="twitter:card" content="summary">
   
@@ -73,14 +73,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-fastAPI5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-RAG/ragStudy5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/my-blog/2026/03/01/fastAPI5/" class="article-date">
-  <time class="dt-published" datetime="2026-03-01T12:25:33.000Z" itemprop="datePublished">2026-03-01</time>
+    <a href="/my-blog/2026/03/29/RAG/ragStudy5/" class="article-date">
+  <time class="dt-published" datetime="2026-03-29T07:07:02.000Z" itemprop="datePublished">2026-03-29</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-RAG/">技術(RAG)</a>
   </div>
 
   </div>
@@ -91,7 +91,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      fastAPI cookie和header取得
+      langChain基础-LLM调用
     </h1>
   
 
@@ -99,13 +99,39 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>①Header取得<br>    @app.get(“&#x2F;items”)<br>    def read_items(<br>        token: str &#x3D; Header(alias&#x3D;”X-Token”)<br>    ):<br>        return {“token”: token}</p>
-<p>②cookie取得<br>    @app.get(“&#x2F;cookies”)<br>    def get_cookie(<br>        my_session: str &#x3D; Cookie(alias&#x3D;”session-id”)<br>    ):<br>        return {“session”: my_session}</p>
+        <p>①Gemini2.5 flash免费<br>    <a target="_blank" rel="noopener" href="https://aistudio.google.com/app/api-keys">https://aistudio.google.com/app/api-keys</a> 注册APIKEY</p>
+<p>②项目下创建.env文件<br>    输入如下内容<br>    GEMINI_API_KEY&#x3D;XXXXXXXX</p>
+<p>③python为了能够读到.env文件中设置APIKEY<br>    pip install python-dotenv 安装</p>
+<p>④调用LLM<br>    pip install google-genai 安装</p>
+<pre><code>代码：
+from google import genai
+from dotenv import load_dotenv
+
+load_dotenv()
+genaiClient = genai.Client()
+answer = generate_answer(question, reranked_docs, genaiClient)
+
+def generate_answer(question: str, answer_docs: list, client: genai.Client)-&gt;str:
+    prompt = f&quot;&quot;&quot;
+    あなたはヘルプデスクのアシスタントです。以下の質問に対して、適切な回答を生成してください。
+    質問に対して、以下のドキュメントを参考：
+    &#123;&quot;\n&quot;.join(answer_docs)&#125;
+
+    質問: &#123;question&#125;
+    &quot;&quot;&quot;
+    print(prompt)
+
+    response = client.models.generate_content(
+        model=&quot;gemini-2.5-flash&quot;,
+        contents=prompt,
+    )
+    return response.text
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnbh7zyp0008smluc55kd10q" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/29/RAG/ragStudy5/" data-id="cmnbh7zyt000usmlufw7mejts" data-title="langChain基础-LLM调用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -115,19 +141,10 @@
     
 <nav id="article-nav">
   
-    <a href="/my-blog/2026/03/08/VUE3/vueStudy2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          VUE入门Samle和elemetPlus应用
-        
-      </div>
-    </a>
   
-  
-    <a href="/my-blog/2026/03/01/fastAPI4/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/my-blog/2026/03/28/RAG/ragStudy4/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">fastAPI事例数据</div>
+      <div class="article-nav-title">langChain基础-召回重排</div>
     </a>
   
 </nav>

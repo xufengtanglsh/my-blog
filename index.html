@@ -71,6 +71,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RAG/ragStudy5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/my-blog/2026/03/29/RAG/ragStudy5/" class="article-date">
+  <time class="dt-published" datetime="2026-03-29T07:07:02.000Z" itemprop="datePublished">2026-03-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-RAG/">技術(RAG)</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/my-blog/2026/03/29/RAG/ragStudy5/">langChain基础-LLM调用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>①Gemini2.5 flash免费<br>    <a target="_blank" rel="noopener" href="https://aistudio.google.com/app/api-keys">https://aistudio.google.com/app/api-keys</a> 注册APIKEY</p>
+<p>②项目下创建.env文件<br>    输入如下内容<br>    GEMINI_API_KEY&#x3D;XXXXXXXX</p>
+<p>③python为了能够读到.env文件中设置APIKEY<br>    pip install python-dotenv 安装</p>
+<p>④调用LLM<br>    pip install google-genai 安装</p>
+<pre><code>代码：
+from google import genai
+from dotenv import load_dotenv
+
+load_dotenv()
+genaiClient = genai.Client()
+answer = generate_answer(question, reranked_docs, genaiClient)
+
+def generate_answer(question: str, answer_docs: list, client: genai.Client)-&gt;str:
+    prompt = f&quot;&quot;&quot;
+    あなたはヘルプデスクのアシスタントです。以下の質問に対して、適切な回答を生成してください。
+    質問に対して、以下のドキュメントを参考：
+    &#123;&quot;\n&quot;.join(answer_docs)&#125;
+
+    質問: &#123;question&#125;
+    &quot;&quot;&quot;
+    print(prompt)
+
+    response = client.models.generate_content(
+        model=&quot;gemini-2.5-flash&quot;,
+        contents=prompt,
+    )
+    return response.text
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/29/RAG/ragStudy5/" data-id="cmnbh7zyt000usmlufw7mejts" data-title="langChain基础-LLM调用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-RAG/ragStudy4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/my-blog/2026/03/28/RAG/ragStudy4/" class="article-date">
@@ -135,7 +205,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnbf16qo000sqklu2r8zbpzq" data-title="langChain基础-召回重排" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy4/" data-id="cmnbh7zyt000ssmlu4e1m4hs6" data-title="langChain基础-召回重排" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -188,7 +258,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnbf16qo000pqklu915vcuo2" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/28/RAG/ragStudy3/" data-id="cmnbh7zys000nsmlu36q19uzz" data-title="langChain基础-embedding" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -417,7 +487,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnbf16qo000nqkluanvr9z6e" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/22/RAG/ragStudy2/" data-id="cmnbh7zys000psmluhgxu58ld" data-title="langChain基础-分片" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -462,7 +532,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnbf16qo000kqkludwko9avh" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/15/RAG/ragStudy1/" data-id="cmnbh7zyr000jsmlu6n7y0hec" data-title="基本概念" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -513,7 +583,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnbf16qp000uqklugk3g88vl" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy1/" data-id="cmnbh7zyt000xsmlug83tc98i" data-title="VUE环境安装" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -572,7 +642,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnbf16qp000xqkluaia4fi4h" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/08/VUE3/vueStudy2/" data-id="cmnbh7zyt000zsmlu1pdibeko" data-title="VUE入门Samle和elemetPlus应用" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -616,7 +686,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnbf16qm000bqkludfh0a9df" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI5/" data-id="cmnbh7zyp0008smluc55kd10q" data-title="fastAPI cookie和header取得" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -664,7 +734,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnbf16ql0008qklugzor61gd" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/03/01/fastAPI4/" data-id="cmnbh7zyq000bsmluc8o3gpce" data-title="fastAPI事例数据" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -721,72 +791,7 @@ def rerank_answer(question: str, answer_docs: list, top_k: int, model: CrossEnco
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnbf16ql0007qklufwrchpb7" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-fastAPI2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/my-blog/2026/02/23/fastAPI2/" class="article-date">
-  <time class="dt-published" datetime="2026-02-23T09:47:35.000Z" itemprop="datePublished">2026-02-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/my-blog/categories/%E6%8A%80%E8%A1%93-python/">技術(python)</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/my-blog/2026/02/23/fastAPI2/">fastAPI参数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>①路径参数<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/students/100">http://127.0.0.1:8000/students/100</a></p>
-<pre><code>@app.get(&quot;/students/&#123;student_id&#125;&quot;)
-def get_student(student_id: int):
-    return &#123;&quot;id&quot;: student_id&#125;
-</code></pre>
-<p>特点：<br>必须写在 URL 路径中<br>自动类型转换<br>类型错误会自动报 422</p>
-<p>②查询参数<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/students?page=2&size=20">http://127.0.0.1:8000/students?page=2&amp;size=20</a></p>
-<pre><code>@app.get(&quot;/students&quot;)
-def get_students(page: int = 1, size: Optional[int] = 10):
-return &#123;&quot;page&quot;: page, &quot;size&quot;: size&#125;
-</code></pre>
-<p>特点：<br>可选参数可以给默认值<br>自动校验类型</p>
-<p>③请求体参数（Body）<br><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/students">http://127.0.0.1:8000/students</a><br>{<br>  “name”: “Tom”,<br>  “age”: 20<br>}</p>
-<pre><code>from pydantic import BaseModel
-class Student(BaseModel):
-    name: str
-    age: int
-
-@app.post(&quot;/students&quot;)
-def create_student(student: Student):
-    return student
-</code></pre>
-<p>特点：<br>自动 JSON 解析<br>自动校验<br>自动生成文档</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/23/fastAPI2/" data-id="cmnbf16qk0005qklu3s0l7qkr" data-title="fastAPI参数" class="article-share-link"><span class="fa fa-share">共有</span></a>
+      <a data-url="https://xufengtanglsh.github.io/my-blog/2026/02/28/fastAPI3/" data-id="cmnbh7zyp0007smlufg6l5d14" data-title="fastAPI参数验证" class="article-share-link"><span class="fa fa-share">共有</span></a>
       
       
       
@@ -841,6 +846,10 @@ def create_student(student: Student):
       <ul>
         
           <li>
+            <a href="/my-blog/2026/03/29/RAG/ragStudy5/">langChain基础-LLM调用</a>
+          </li>
+        
+          <li>
             <a href="/my-blog/2026/03/28/RAG/ragStudy4/">langChain基础-召回重排</a>
           </li>
         
@@ -854,10 +863,6 @@ def create_student(student: Student):
         
           <li>
             <a href="/my-blog/2026/03/15/RAG/ragStudy1/">基本概念</a>
-          </li>
-        
-          <li>
-            <a href="/my-blog/2026/03/08/VUE3/vueStudy1/">VUE环境安装</a>
           </li>
         
       </ul>
